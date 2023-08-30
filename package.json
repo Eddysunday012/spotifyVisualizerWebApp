@@ -11,7 +11,7 @@
   "devDependencies": {
     "@testing-library/react": "^13.4.0",
     "eslint": "^8.47.0",
-    "prettier": "^3.0.2",
+    "prettier": "^3.0.3",
     "tsconfig": "*",
     "turbo": "latest",
     "typescript": "^5.2.2",
