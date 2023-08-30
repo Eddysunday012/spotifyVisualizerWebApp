@@ -13,13 +13,18 @@
     "eslint": "^8.47.0",
     "prettier": "^3.0.2",
     "tsconfig": "*",
-    "turbo": "latest"
+    "turbo": "latest",
+    "vitest": "^0.34.3"
   },
-  "name": "spotifyVisualizer",
+  "name": "spotify-visualizer",
   "version": "0.0.0",
   "packageManager": "yarn@1.22.19",
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "vitest": "^0.24.3",
+    "axios": "^1.5.0"
+  }
 }
