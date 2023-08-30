@@ -14,6 +14,7 @@
     "prettier": "^3.0.2",
     "tsconfig": "*",
     "turbo": "latest",
+    "typescript": "^5.2.2",
     "vitest": "^0.34.3"
   },
   "name": "spotify-visualizer",
@@ -24,7 +25,6 @@
     "packages/*"
   ],
   "dependencies": {
-    "vitest": "^0.24.3",
     "axios": "^1.5.0"
   }
 }
