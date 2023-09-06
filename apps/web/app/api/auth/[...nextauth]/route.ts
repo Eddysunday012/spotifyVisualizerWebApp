@@ -8,6 +8,7 @@ export const authOptions = {
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET || "",
     }),
   ],
+  callbacks: {},
 };
 
 const handler = NextAuth(authOptions);
