@@ -31,6 +31,10 @@ export const authOptions = {
       authorization: LOGIN_URL,
     }),
   ],
+  pages: {
+    signIn: "/login",
+  },
+  secret: process.env.JWT_SECRET,
   callbacks: {
     async jwt({ token, account, user }: any) {
       // initial sign in
