@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
 import { LOGIN_URL, spotifyApi } from "../../../lib/spotify";
 
@@ -23,7 +23,7 @@ async function refreshAcessToken({ token }: any) {
   }
 }
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     SpotifyProvider({
       clientId: process.env.SPOTIFY_CLIENT_ID || "",
@@ -36,7 +36,7 @@ export const authOptions = {
   },
   secret: process.env.JWT_SECRET,
   callbacks: {
-    async jwt({ token, account, user }: any) {
+    async jwt({ token, account, user }) {
       // initial sign in
       if (account && user)
         return {
