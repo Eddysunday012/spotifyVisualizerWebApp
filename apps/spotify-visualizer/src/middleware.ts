@@ -1,10 +1,9 @@
 import { getToken } from "next-auth/jwt";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(req: any) {
   const token = await getToken({ req, secret: process.env.JWT_SECRET });
-  // console.log('token', token)
-  console.log(process.env.JWT_SECRET);
+  console.log("token", token);
 
   const { pathname } = req.nextUrl;
   if (pathname.includes("/api/auth") || token) {
