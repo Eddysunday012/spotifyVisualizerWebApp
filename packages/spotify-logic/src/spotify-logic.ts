@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import useSpotify from "./useSpotify";
 
 export default async function getTopSongs(accessToken: any) {
   const response = await fetch(

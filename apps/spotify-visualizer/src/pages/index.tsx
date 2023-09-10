@@ -2,27 +2,30 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import NextAuth, { NextAuthOptions } from "next-auth";
-import { useSession, signOut } from "next-auth/react";
+import { useSession, signOut, signIn } from "next-auth/react";
 import getTopSongs from "@/hooks/getTopSongs";
 import Component from "@/components/testComponent";
 import { useState, useEffect } from "react";
+import { spotifyApi } from "@/lib/spotify";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const { data: session, status } = useSession();
-
   const [topTracks, setTopTracks] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      let accessToken = session?.user?.accessToken;
-      const songs = await getTopSongs(accessToken);
-      setTopTracks(songs);
+      if (session && session.user && session.user.accessToken) {
+        let accessToken = session?.user?.accessToken;
+        console.log(accessToken);
+        const songs = await getTopSongs(accessToken);
+        setTopTracks(songs);
+      }
     }
 
     fetchData();
-  }, []);
+  }, [session]);
 
   return (
     <>
