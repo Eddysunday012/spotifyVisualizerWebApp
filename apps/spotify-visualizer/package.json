@@ -19,6 +19,7 @@
     "react-dom": "18.2.0",
     "typescript": "5.2.2",
     "ui": "*",
+    "spotify-logic": "*",
     "spotify-web-api-node": "*"
   }
 }
