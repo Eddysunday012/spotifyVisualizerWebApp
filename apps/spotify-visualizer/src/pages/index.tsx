@@ -19,7 +19,6 @@ export default function Home() {
     async function fetchData() {
       if (session && session.user && session.user.accessToken) {
         let accessToken = session?.user?.accessToken;
-        console.log(accessToken);
         const songs = await getTopSongs(accessToken);
         const userProfile = await getUserProfile(accessToken);
         setTopTracks(songs);
@@ -37,13 +36,13 @@ export default function Home() {
       </Head>
 
       <h1>Welcome to the Spotify Visualization App!</h1>
-      <img src={session?.user.image} alt="" />
+      <img src={session?.user?.image} alt="" />
       <ul>
         {topTracks.map((song: any) => (
           <li key={song.id}>{song.name}</li>
         ))}
       </ul>
-      <h1>{JSON.stringify(profile)}</h1>
+      <div>{JSON.stringify(profile)}</div>
 
       <button onClick={() => signOut()}>Sign Out</button>
     </>
