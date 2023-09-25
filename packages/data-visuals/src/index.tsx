@@ -1,2 +1,2 @@
-import { UserDisplay } from "./generalUserInfo";
+import { UserDisplay } from "./UserDisplay";
 export { UserDisplay };
