@@ -1,7 +1,7 @@
 import { DefaultSession } from "next-auth";
 
 export interface myUser {
-  myGeneralUserInfo: generalUserInfo | null;
+  myUserDisplay: userDisplay | null;
   myTopArtists: topArtists | null;
   myTopTracks: topTracks | null;
   myHoursListened: Array<timeStamp>;
@@ -14,13 +14,12 @@ export interface MySession extends Omit<DefaultSession, "user"> {
   expires: string;
 }
 
-export interface generalUserInfo {
-  profilePic?: string | null;
+export interface userDisplay {
+  profilePic: string;
   name: string | null;
-  totalHoursListened?: number | null;
   numFollowers?: number | null;
   numFollowing?: number | null;
-  numPlaylists?: number | null;
+  // numPlaylists?: number | null;
 }
 
 export interface topArtists {

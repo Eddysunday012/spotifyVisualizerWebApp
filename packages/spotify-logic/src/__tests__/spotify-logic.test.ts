@@ -1,6 +1,6 @@
 import { getTopArtists, getTopSongs, getUserProfile } from "../spotify-logic";
 import { mockResponse, mockedFetch } from "../MockedFetch";
-import { myUser } from "../../../types";
+import { myUser } from "../../../types/src";
 
 global.fetch = mockedFetch;
 

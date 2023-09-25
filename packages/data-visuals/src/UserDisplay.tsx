@@ -1,6 +1,7 @@
 import { DependenciesContext } from "dependencies-context";
 import { PropsWithChildren } from "react";
-// import { Container } from "@mui/material";
+import { Container } from "@mui/material";
+import { userDisplay } from "types";
 // import Profile from "./img/Profile.png";
 
 export interface UserDisplayProps extends PropsWithChildren {}
@@ -15,7 +16,14 @@ export const UserDisplay: React.FunctionComponent<UserDisplayProps> = () => {
 
   return (
     <DependenciesContext.Consumer>
-      {({ Profile }: any) => <img style={ImageMyStyle} src={Profile} alt="" />}
+      {({ Profile }: any) => {
+        const profileData = Profile as userDisplay;
+        return (
+          <Container>
+            <img style={ImageMyStyle} src={profileData.profilePic} alt="" />
+          </Container>
+        );
+      }}
     </DependenciesContext.Consumer>
   );
 };
