@@ -6,6 +6,6 @@ import { UserDisplay } from "data-visuals";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
+    <UserDisplay />
   </React.StrictMode>
 );
