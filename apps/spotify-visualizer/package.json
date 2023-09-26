@@ -20,6 +20,8 @@
     "typescript": "5.2.2",
     "ui": "*",
     "spotify-logic": "*",
-    "spotify-web-api-node": "*"
+    "spotify-web-api-node": "*",
+    "data-visuals": "*",
+    "dependencies-context": "*"
   }
 }

@@ -50,3 +50,19 @@ export async function getUserProfile(accessToken: any) {
   const data = await response.json();
   return data;
 }
+
+export async function getUserPlaylistNum(accessToken: any) {
+  const response = await fetch("https://api.spotify.com/v1/me/playlists", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    // console.log(response);
+    throw new Error("Failed to fetch top tracks");
+  }
+
+  const data = await response.json();
+  return data.total;
+}

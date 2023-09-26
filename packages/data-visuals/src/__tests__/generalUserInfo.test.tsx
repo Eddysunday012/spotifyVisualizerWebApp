@@ -6,39 +6,41 @@ import Profile from "../img/Profile.png";
 import { userDisplay } from "types";
 
 describe("test userDisplay suite", () => {
-  const user: userDisplay = {
+  const UserDisplayInfo: userDisplay = {
     profilePic: Profile,
     name: "Ethan Domingo",
     numFollowers: 23,
     numFollowing: 88,
+    numPlaylists: 90,
   };
 
   it("should render properly", async () => {
     render(
-      <DependenciesContext.Provider value={{ user }}>
+      <DependenciesContext.Provider value={{ UserDisplayInfo }}>
         <UserDisplay />
       </DependenciesContext.Provider>
     );
   });
 
   it("should have the users name", async () => {
-    const user: userDisplay = {
+    const UserDisplayInfo: userDisplay = {
       profilePic: Profile,
       name: "Ethan Domingo",
       numFollowers: 23,
       numFollowing: 88,
+      numPlaylists: 90,
     };
 
     render(
-      <DependenciesContext.Provider value={{ user }}>
+      <DependenciesContext.Provider value={{ UserDisplayInfo }}>
         <UserDisplay />
       </DependenciesContext.Provider>
     );
 
-    const foundName = screen.findByText(user.name);
+    const foundName = screen.findByText(UserDisplayInfo.name);
 
     expect(foundName).toBeTruthy();
-    expect(screen.findByText(user.numFollowers)).toBeTruthy();
-    expect(screen.findByText(user.numFollowing)).toBeTruthy();
+    expect(screen.findByText(UserDisplayInfo.numFollowers)).toBeTruthy();
+    expect(screen.findByText(UserDisplayInfo.numFollowing)).toBeTruthy();
   });
 });

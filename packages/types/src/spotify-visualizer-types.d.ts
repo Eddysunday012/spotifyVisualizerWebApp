@@ -19,7 +19,7 @@ export interface userDisplay {
   name: string;
   numFollowers: number;
   numFollowing: number;
-  // numPlaylists?: number | null;
+  numPlaylists: number;
 }
 
 export interface topArtists {

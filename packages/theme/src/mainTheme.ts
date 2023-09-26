@@ -8,4 +8,12 @@ export const mainTheme = createTheme({
     fontWeightMedium: 600, // Semibold (600) weight
     fontWeightBold: 800, // Extrabold (800) weight
   },
+  palette: {
+    background: {
+      default: "#212121",
+    },
+    text: {
+      primary: "#FFFFFF",
+    },
+  },
 });

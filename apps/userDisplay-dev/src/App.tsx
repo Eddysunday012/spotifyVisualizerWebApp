@@ -5,16 +5,17 @@ import Profile from "./assets/Profile.png";
 import { userDisplay } from "types";
 
 function App(): JSX.Element {
-  const user: userDisplay = {
+  const UserDisplayInfo: userDisplay = {
     profilePic: Profile,
     name: "Ethan Domingo",
     numFollowers: 23,
     numFollowing: 88,
+    numPlaylists: 25,
   };
 
   return (
     <>
-      <DependenciesContext.Provider value={{ user }}>
+      <DependenciesContext.Provider value={{ UserDisplayInfo }}>
         <UserDisplay />
       </DependenciesContext.Provider>
     </>

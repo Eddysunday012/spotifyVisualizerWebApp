@@ -1,19 +1,29 @@
-import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "next/font/google";
-import NextAuth, { NextAuthOptions } from "next-auth";
 import { useSession, signOut, signIn } from "next-auth/react";
 import { getTopArtists, getTopSongs, getUserProfile } from "spotify-logic";
-import Component from "@/components/testComponent";
 import { useState, useEffect } from "react";
-import { spotifyApi } from "@/lib/spotify";
+import { UserDisplay } from "data-visuals";
+import { DependenciesContext } from "dependencies-context";
+import { getUserPlaylistNum } from "spotify-logic/src/spotify-logic";
+import { Box, Button, createTheme, ThemeProvider } from "@mui/material";
 
-const inter = Inter({ subsets: ["latin"] });
+export const themeDark = createTheme({
+  palette: {
+    background: {
+      default: "#212121",
+    },
+    text: {
+      primary: "#FFFFFF",
+    },
+  },
+});
 
 export default function Home() {
   const { data: session, status } = useSession();
   const [topTracks, setTopTracks] = useState([]);
-  const [profile, setProile] = useState({});
+  const [profile, setProfile] = useState({});
+  const [UserDisplayInfo, setUserDisplayInfo] = useState({});
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -21,30 +31,53 @@ export default function Home() {
         let accessToken = session?.user?.accessToken;
         const songs = await getTopSongs(accessToken);
         const userProfile = await getUserProfile(accessToken);
-        setTopTracks(songs);
-        setProile(userProfile);
+        const numPlaylists = await getUserPlaylistNum(accessToken);
+
+        return { songs, userProfile, numPlaylists };
       }
     }
 
-    fetchData();
+    fetchData().then((result) => {
+      console.log(result?.userProfile);
+      setUserDisplayInfo({
+        profilePic: result?.userProfile.images[1].url,
+        name: result?.userProfile.display_name,
+        numFollowers: result?.userProfile.followers.total,
+        numFollowing: 80,
+        numPlaylists: result?.numPlaylists,
+      });
+
+      setTopTracks(result?.songs);
+      setProfile(result?.userProfile);
+      setLoading(false);
+    });
   }, [session]);
 
   return (
     <>
-      <Head>
-        <title>Spotify Visualizer</title>
-      </Head>
-
-      <h1>Welcome to the Spotify Visualization App!</h1>
-      <img src={session?.user?.image} alt="" />
-      <ul>
-        {topTracks.map((song: any) => (
-          <li key={song.id}>{song.name}</li>
-        ))}
-      </ul>
-      <div>{JSON.stringify(profile)}</div>
-
-      <button onClick={() => signOut()}>Sign Out</button>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <DependenciesContext.Provider value={{ UserDisplayInfo }}>
+          <ThemeProvider theme={themeDark}>
+            <Box
+              sx={{
+                backgroundColor: "#212121",
+                minHeight: "100vh", // Ensure the background color covers the full viewport height
+                display: "flex",
+                flexDirection: "column", // Align children vertically
+                overflowX: "hidden",
+                margin: -1,
+              }}
+            >
+              <UserDisplay />
+              <Button variant="contained" onClick={() => signOut()}>
+                Sign Out
+              </Button>
+            </Box>
+          </ThemeProvider>
+        </DependenciesContext.Provider>
+      )}
     </>
   );
 }

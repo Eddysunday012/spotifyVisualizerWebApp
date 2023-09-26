@@ -13,12 +13,18 @@ export const UserDisplay: React.FunctionComponent<UserDisplayProps> = () => {
     maxHeight: "230px",
     flex: 1,
     resizeMode: "contain",
+    borderRadius: "50%",
   };
 
   return (
     <DependenciesContext.Consumer>
-      {({ user }: any) => {
-        const profileData = user as userDisplay;
+      {({ UserDisplayInfo }: any) => {
+        console.log(UserDisplayInfo);
+        if (!UserDisplayInfo) {
+          return null; // Return null to prevent rendering when data is not available
+        }
+        const profileData = UserDisplayInfo as userDisplay;
+
         return (
           <ThemeProvider theme={mainTheme}>
             <Box
@@ -56,8 +62,13 @@ export const UserDisplay: React.FunctionComponent<UserDisplayProps> = () => {
                       alignItems: "center",
                     }}
                   >
-                    <Typography variant="h3" align="center" fontWeight="bold">
-                      {user.name}
+                    <Typography
+                      variant="h3"
+                      align="center"
+                      fontWeight="bold"
+                      color="common.white"
+                    >
+                      {profileData.name}
                     </Typography>
                   </Grid>
                   <Grid
@@ -70,8 +81,13 @@ export const UserDisplay: React.FunctionComponent<UserDisplayProps> = () => {
                     }}
                     marginRight={1}
                   >
-                    <Typography variant="h5" align="right" fontWeight={600}>
-                      {user.numFollowers} Followers
+                    <Typography
+                      variant="h5"
+                      align="right"
+                      fontWeight={600}
+                      color="common.white"
+                    >
+                      {profileData.numFollowers} Followers
                     </Typography>
                   </Grid>
                   <Grid
@@ -84,8 +100,31 @@ export const UserDisplay: React.FunctionComponent<UserDisplayProps> = () => {
                     }}
                     marginLeft={1}
                   >
-                    <Typography variant="h5" align="left" fontWeight={600}>
-                      {user.numFollowing} Following
+                    <Typography
+                      variant="h5"
+                      align="left"
+                      fontWeight={600}
+                      color="common.white"
+                    >
+                      {profileData.numFollowing} Following
+                    </Typography>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    style={{
+                      justifyContent: "center",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography
+                      variant="h5"
+                      align="center"
+                      fontWeight={600}
+                      color="common.white"
+                    >
+                      {profileData.numPlaylists} Total Playlists
                     </Typography>
                   </Grid>
                 </Grid>

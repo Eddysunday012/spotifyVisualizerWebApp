@@ -1,6 +1,10 @@
-import { getTopArtists, getTopSongs, getUserProfile } from "../spotify-logic";
+import {
+  getTopArtists,
+  getTopSongs,
+  getUserPlaylistNum,
+  getUserProfile,
+} from "../spotify-logic";
 import { mockResponse, mockedFetch } from "../MockedFetch";
-import { myUser } from "../../../types/src";
 
 global.fetch = mockedFetch;
 
@@ -158,6 +162,48 @@ describe("getUserProfile testing suite", () => {
 
     // Call the function and expect it to throw an error
     await expect(getUserProfile(accessToken)).rejects.toThrowError(
+      "Failed to fetch top tracks"
+    );
+  });
+});
+
+describe("getUserPlaylistNum testing suite", () => {
+  beforeEach(() => {
+    jest.spyOn(global, "fetch").mockImplementation(mockedFetch);
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it("fetches user Playlist successfully", async () => {
+    const exampleData = {
+      total: 90,
+      items: [],
+    };
+
+    // Mock a successful response
+    mockResponse(exampleData);
+
+    // Mock the access token
+    const accessToken = "your-access-token";
+
+    // Call the function
+    const result = await getUserPlaylistNum(accessToken);
+
+    // Assert the result
+    expect(result).toEqual(exampleData.total);
+  });
+
+  it("handles fetch failure", async () => {
+    // Mock a failed response
+    mockResponse({}, 401); // For example, unauthorized error
+
+    // Mock the access token
+    const accessToken = "your-access-token";
+
+    // Call the function and expect it to throw an error
+    await expect(getUserPlaylistNum(accessToken)).rejects.toThrowError(
       "Failed to fetch top tracks"
     );
   });
