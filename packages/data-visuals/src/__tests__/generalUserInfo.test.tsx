@@ -22,7 +22,6 @@ describe("test userDisplay suite", () => {
   });
 
   it("should have the users name", async () => {
-    const sessionName = "Ethan Domingo";
     const user: userDisplay = {
       profilePic: Profile,
       name: "Ethan Domingo",
@@ -36,6 +35,10 @@ describe("test userDisplay suite", () => {
       </DependenciesContext.Provider>
     );
 
-    expect(screen.findAllByText(sessionName)).toBeTruthy();
+    const foundName = screen.findByText(user.name);
+
+    expect(foundName).toBeTruthy();
+    expect(screen.findByText(user.numFollowers)).toBeTruthy();
+    expect(screen.findByText(user.numFollowing)).toBeTruthy();
   });
 });

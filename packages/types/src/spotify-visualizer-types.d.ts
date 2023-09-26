@@ -16,9 +16,9 @@ export interface MySession extends Omit<DefaultSession, "user"> {
 
 export interface userDisplay {
   profilePic: string;
-  name: string | null;
-  numFollowers?: number | null;
-  numFollowing?: number | null;
+  name: string;
+  numFollowers: number;
+  numFollowing: number;
   // numPlaylists?: number | null;
 }
 

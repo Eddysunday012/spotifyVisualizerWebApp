@@ -1,22 +1,10 @@
 {
-    "name": "data-visuals",
+    "name": "theme",
     "version": "0.0.0",
-    "main": "src/index.tsx",
-    "types": "src/index.tsx",
+    "main": "src/index.ts",
     "license": "MIT",
     "scripts": {
-      "lint": "eslint .",
-      "test": "vitest run --coverage --passWithNoTests"
-    },
-    "babel": {
-      "presets": [
-        "@babel/preset-env",
-        "@babel/preset-react"
-      ]
-    },
-    "dependencies": {
-      "react": "^18.2.0",
-      "react-dom": "^18.2.0"
+      "lint": "eslint ."
     },
     "devDependencies": {
       "@turbo/gen": "^1.10.12",
@@ -37,7 +25,6 @@
       "@mui/material": "^5.14.10",
       "vite": "^4.4.5",
       "dependencies-context": "*",
-      "@vitejs/plugin-react" : "*",
-      "theme": "*"
+      "@vitejs/plugin-react" : "*"
     }
-  }
+}
