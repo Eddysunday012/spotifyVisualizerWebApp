@@ -43,4 +43,13 @@ describe("test userDisplay suite", () => {
     expect(screen.findByText(UserDisplayInfo.numFollowers)).toBeTruthy();
     expect(screen.findByText(UserDisplayInfo.numFollowing)).toBeTruthy();
   });
+
+  it("should render nothing if no information", async () => {
+    const UserDisplayInfo = undefined;
+    render(
+      <DependenciesContext.Provider value={{ UserDisplayInfo }}>
+        <UserDisplay />
+      </DependenciesContext.Provider>
+    );
+  });
 });

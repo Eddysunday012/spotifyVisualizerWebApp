@@ -1,7 +1,15 @@
 import { DependenciesContext } from "dependencies-context";
 import { PropsWithChildren } from "react";
-import { Container, Typography, Box, Grid, ThemeProvider } from "@mui/material";
+import {
+  Container,
+  Typography,
+  Box,
+  Grid,
+  ThemeProvider,
+  Button,
+} from "@mui/material";
 import { userDisplay } from "types";
+import { signOut } from "next-auth/react";
 import mainTheme from "theme";
 // import Profile from "./img/Profile.png";
 
@@ -19,7 +27,7 @@ export const UserDisplay: React.FunctionComponent<UserDisplayProps> = () => {
   return (
     <DependenciesContext.Consumer>
       {({ UserDisplayInfo }: any) => {
-        console.log(UserDisplayInfo);
+        // console.log(UserDisplayInfo);
         if (!UserDisplayInfo) {
           return null; // Return null to prevent rendering when data is not available
         }
@@ -126,6 +134,20 @@ export const UserDisplay: React.FunctionComponent<UserDisplayProps> = () => {
                     >
                       {profileData.numPlaylists} Total Playlists
                     </Typography>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    style={{
+                      justifyContent: "center",
+                      display: "flex",
+                      alignItems: "center",
+                      marginTop: 20,
+                    }}
+                  >
+                    <Button variant="contained" onClick={() => signOut()}>
+                      Sign Out
+                    </Button>
                   </Grid>
                 </Grid>
               </Container>

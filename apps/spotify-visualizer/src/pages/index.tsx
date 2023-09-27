@@ -55,7 +55,7 @@ export default function Home() {
 
   return (
     <>
-      {isLoading ? (
+      {isLoading && session ? (
         <p>Loading...</p>
       ) : (
         <DependenciesContext.Provider value={{ UserDisplayInfo }}>
@@ -71,9 +71,6 @@ export default function Home() {
               }}
             >
               <UserDisplay />
-              <Button variant="contained" onClick={() => signOut()}>
-                Sign Out
-              </Button>
             </Box>
           </ThemeProvider>
         </DependenciesContext.Provider>
