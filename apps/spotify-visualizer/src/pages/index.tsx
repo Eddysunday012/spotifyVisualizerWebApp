@@ -45,6 +45,7 @@ export default function Home() {
         numFollowers: result?.userProfile.followers.total,
         numFollowing: 80,
         numPlaylists: result?.numPlaylists,
+        signOut: () => signOut(),
       });
 
       setTopTracks(result?.songs);

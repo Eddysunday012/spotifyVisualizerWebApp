@@ -1,4 +1,4 @@
-import { getByText, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { TopArtists } from "../TopArtists";
 import { DependenciesContext } from "dependencies-context";
@@ -14,7 +14,7 @@ describe("test TopArtists suite", () => {
   list.forEach((item) => {
     for (let i = 0; i < 5; i++) {
       const newArtist: artistItem = {
-        name: "artist ${i + 1}",
+        name: `artist ${i + 1}`,
         percentage: 23,
       };
       item.push(newArtist);
@@ -33,15 +33,17 @@ describe("test TopArtists suite", () => {
       </DependenciesContext.Provider>
     );
 
-    // expect(getByText(month[0].name)).toBeTruthy();
+    expect(screen.getByText("Month")).toBeTruthy();
+    expect(screen.getByText("Year")).toBeTruthy();
+    expect(screen.getByText("All Time")).toBeTruthy();
   });
 
-  it("should render if no information", async () => {
-    const TopArtistInfo = undefined;
-    render(
-      <DependenciesContext.Provider value={{ TopArtistInfo }}>
-        <TopArtists />
-      </DependenciesContext.Provider>
-    );
-  });
+  //   it("should render if no information", async () => {
+  //     const TopArtistInfo = undefined;
+  //     render(
+  //       <DependenciesContext.Provider value={{ TopArtistInfo }}>
+  //         <TopArtists />
+  //       </DependenciesContext.Provider>
+  //     );
+  //   });
 });

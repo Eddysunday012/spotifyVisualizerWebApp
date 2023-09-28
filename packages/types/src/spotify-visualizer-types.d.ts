@@ -20,6 +20,7 @@ export interface userDisplay {
   numFollowers: number;
   numFollowing: number;
   numPlaylists: number;
+  signOut: <T>() => void;
 }
 
 export interface topArtists {

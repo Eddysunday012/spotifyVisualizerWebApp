@@ -1,2 +1,3 @@
 import { UserDisplay } from "./UserDisplay";
-export { UserDisplay };
+import { TopArtists } from "./TopArtists";
+export { UserDisplay, TopArtists };

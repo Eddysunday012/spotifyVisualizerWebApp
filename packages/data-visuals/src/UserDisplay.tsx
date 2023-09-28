@@ -9,7 +9,7 @@ import {
   Button,
 } from "@mui/material";
 import { userDisplay } from "types";
-import { signOut } from "next-auth/react";
+// import { signOut } from "next-auth/react";
 import mainTheme from "theme";
 // import Profile from "./img/Profile.png";
 
@@ -145,7 +145,10 @@ export const UserDisplay: React.FunctionComponent<UserDisplayProps> = () => {
                       marginTop: 20,
                     }}
                   >
-                    <Button variant="contained" onClick={() => signOut()}>
+                    <Button
+                      variant="contained"
+                      onClick={() => profileData.signOut()}
+                    >
                       Sign Out
                     </Button>
                   </Grid>

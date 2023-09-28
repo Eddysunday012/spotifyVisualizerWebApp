@@ -4,6 +4,10 @@ import React from "react";
 import Profile from "./assets/Profile.png";
 import { userDisplay } from "types";
 
+function handleSignOut() {
+  alert("Sign Out works!");
+}
+
 function App(): JSX.Element {
   const UserDisplayInfo: userDisplay = {
     profilePic: Profile,
@@ -11,6 +15,7 @@ function App(): JSX.Element {
     numFollowers: 23,
     numFollowing: 88,
     numPlaylists: 25,
+    signOut: () => handleSignOut(),
   };
 
   return (
