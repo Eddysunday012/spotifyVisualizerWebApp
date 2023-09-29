@@ -2,29 +2,53 @@ import { DependenciesContext } from "dependencies-context";
 import { PropsWithChildren, useState } from "react";
 import {
   Container,
-  Typography,
   Box,
-  Grid,
-  ThemeProvider,
   Button,
-  ToggleButtonGroup,
-  ToggleButton,
+  List,
+  ListItem,
+  Typography,
+  Avatar,
 } from "@mui/material";
+import { motion, useAnimation } from "framer-motion";
+import { artistItem } from "types";
 // import mainTheme from "theme";
 
 export interface TopArtistsDisplayProps extends PropsWithChildren {}
 
+interface ArtistListItemDisplayProps {
+  artist: artistItem;
+}
+
+function stringAvatar(name: string) {
+  return {
+    children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+  };
+}
+
+export const ArtistListItem: React.FunctionComponent<
+  ArtistListItemDisplayProps
+> = ({ artist }) => {
+  return (
+    <ListItem key={artist.name}>
+      <Avatar {...stringAvatar(artist.name)} />
+      <Typography>{artist.name}</Typography>
+    </ListItem>
+  );
+};
+
 export const TopArtists: React.FunctionComponent<
   TopArtistsDisplayProps
 > = () => {
-  const listSwitch: Array<String> = ["Month", "Year", "All Time"];
-  const [alignment, setAlignment] = useState<string | null>("left");
+  const [activeTab, setActiveTab] = useState("Month");
+  const lineControls = useAnimation();
 
-  const handleAlignment = (
-    event: React.MouseEvent<HTMLElement>,
-    newAlignment: string | null
-  ) => {
-    setAlignment(newAlignment);
+  const handleTabClick = (tab: any) => {
+    setActiveTab(tab);
+
+    // Animate the line to the clicked option
+    lineControls.start({
+      x: tab === "Month" ? 0 : tab === "Year" ? 1 : 2,
+    });
   };
 
   return (
@@ -37,18 +61,38 @@ export const TopArtists: React.FunctionComponent<
             }}
           >
             <Container>
-              <ToggleButtonGroup
-                value={alignment}
-                exclusive
-                onChange={handleAlignment}
-                aria-label="text alignment"
-              >
-                {listSwitch.map((item) => (
-                  <ToggleButton value="left" aria-label="left aligned">
-                    {item}
-                  </ToggleButton>
+              <div>
+                <Button
+                  onClick={() => handleTabClick("Month")}
+                  sx={{ color: activeTab === "Month" ? "primary" : "default" }}
+                >
+                  Month
+                </Button>
+                <Button
+                  onClick={() => handleTabClick("Year")}
+                  sx={{ color: activeTab === "Year" ? "primary" : "default" }}
+                >
+                  Year
+                </Button>
+                <Button
+                  onClick={() => handleTabClick("All Time")}
+                  sx={{
+                    color: activeTab === "All Time" ? "primary" : "default",
+                  }}
+                >
+                  All Time
+                </Button>
+                <motion.div
+                  className="line"
+                  initial={{ x: 0 }}
+                  animate={lineControls}
+                />
+              </div>
+              <List>
+                {TopArtistsInfo.month.map((artist: artistItem) => (
+                  <ArtistListItem key={artist.name} artist={artist} />
                 ))}
-              </ToggleButtonGroup>
+              </List>
             </Container>
           </Box>
         );

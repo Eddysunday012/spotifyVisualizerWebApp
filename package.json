@@ -33,6 +33,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.10",
     "axios": "^1.5.0",
+    "framer-motion": "^10.16.4",
     "next-auth": "latest",
     "spotify-web-api-node": "^5.0.2"
   }

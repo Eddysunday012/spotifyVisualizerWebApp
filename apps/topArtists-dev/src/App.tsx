@@ -1,6 +1,7 @@
 import { TopArtists } from "data-visuals";
 import { DependenciesContext } from "dependencies-context";
 import { topArtists, artistItem } from "types";
+import React from "react";
 
 function App(): JSX.Element {
   const month: Array<artistItem> = [];
@@ -18,7 +19,7 @@ function App(): JSX.Element {
     }
   });
 
-  const TopArtistInfo: topArtists = {
+  const TopArtistsInfo: topArtists = {
     month: month,
     year: year,
     allTime: allTime,
@@ -26,7 +27,7 @@ function App(): JSX.Element {
 
   return (
     <>
-      <DependenciesContext.Provider value={{ TopArtistInfo }}>
+      <DependenciesContext.Provider value={{ TopArtistsInfo }}>
         <TopArtists />
       </DependenciesContext.Provider>
     </>
