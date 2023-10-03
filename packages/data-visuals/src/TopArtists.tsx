@@ -81,80 +81,110 @@ export const TopArtists: React.FunctionComponent<
             <Box
               sx={{
                 backgroundColor: "#535353",
-                borderRadius: "10%",
-                width: "auto",
+                borderRadius: "3%",
+                width: 597,
               }}
             >
               <Container>
-                <div>
-                  <Button
-                    variant="text"
-                    color="primary"
-                    onClick={() => handleButtonClick(0)}
-                    sx={{
-                      "&:focus": {
-                        outline: "none",
-                      },
-                    }}
+                <Grid container alignItems="center" justifyContent="center">
+                  <Grid
+                    container
+                    item
+                    xs={4}
+                    alignItems="center"
+                    justifyContent="center"
                   >
-                    <Typography
-                      variant="h3"
-                      fontWeight={600}
-                      style={{
-                        textTransform: "none",
-                        textDecoration:
-                          underlinedButton === 0 ? "underline" : "none",
+                    <Button
+                      disableRipple
+                      variant="text"
+                      color="primary"
+                      onClick={() => handleButtonClick(0)}
+                      sx={{
+                        "&:focus": {
+                          outline: "none",
+                        },
+                        "&:hover": { backgroundColor: "transparent" },
                       }}
-                      sx={{ color: "#FFFFFF", fontSize: 30 }}
                     >
-                      Month
-                    </Typography>
-                  </Button>
-                  <Button
-                    variant="text"
-                    color="primary"
-                    onClick={() => handleButtonClick(1)}
-                    sx={{
-                      "&:focus": {
-                        outline: "none",
-                      },
-                    }}
+                      <Typography
+                        variant="h3"
+                        fontWeight={600}
+                        style={{
+                          textTransform: "none",
+                          textDecoration:
+                            underlinedButton === 0 ? "underline" : "none",
+                        }}
+                        sx={{ color: "#FFFFFF", fontSize: 30 }}
+                      >
+                        Month
+                      </Typography>
+                    </Button>
+                  </Grid>
+                  <Grid
+                    container
+                    item
+                    xs={4}
+                    alignItems="center"
+                    justifyContent="center"
                   >
-                    <Typography
-                      fontWeight={600}
-                      style={{
-                        textTransform: "none",
-                        textDecoration:
-                          underlinedButton === 1 ? "underline" : "none",
+                    <Button
+                      disableRipple
+                      variant="text"
+                      color="primary"
+                      onClick={() => handleButtonClick(1)}
+                      sx={{
+                        "&:focus": {
+                          outline: "none",
+                        },
+                        "&:hover": { backgroundColor: "transparent" },
                       }}
-                      sx={{ color: "#FFFFFF", fontSize: 30 }}
                     >
-                      Year
-                    </Typography>
-                  </Button>
-                  <Button
-                    variant="text"
-                    color="primary"
-                    onClick={() => handleButtonClick(2)}
-                    sx={{
-                      "&:focus": {
-                        outline: "none",
-                      },
-                    }}
+                      <Typography
+                        fontWeight={600}
+                        style={{
+                          textTransform: "none",
+                          textDecoration:
+                            underlinedButton === 1 ? "underline" : "none",
+                        }}
+                        sx={{ color: "#FFFFFF", fontSize: 30 }}
+                      >
+                        Year
+                      </Typography>
+                    </Button>
+                  </Grid>
+                  <Grid
+                    container
+                    item
+                    xs={4}
+                    alignItems="center"
+                    justifyContent="center"
                   >
-                    <Typography
-                      fontWeight={600}
-                      style={{
-                        textTransform: "none",
-                        textDecoration:
-                          underlinedButton === 2 ? "underline" : "none",
+                    <Button
+                      disableRipple
+                      variant="text"
+                      color="primary"
+                      onClick={() => handleButtonClick(2)}
+                      sx={{
+                        "&:focus": {
+                          outline: "none",
+                        },
+                        "&:hover": { backgroundColor: "transparent" },
                       }}
-                      sx={{ color: "#FFFFFF", fontSize: 30 }}
                     >
-                      All Time
-                    </Typography>
-                  </Button>
-                </div>
+                      <Typography
+                        fontWeight={600}
+                        style={{
+                          textTransform: "none",
+                          textDecoration:
+                            underlinedButton === 2 ? "underline" : "none",
+                        }}
+                        sx={{ color: "#FFFFFF", fontSize: 30 }}
+                      >
+                        All Time
+                      </Typography>
+                    </Button>
+                  </Grid>
+                </Grid>
                 <List>
                   {artistListItems[artistListNum].map((artist: artistItem) => (
                     <ArtistListItem key={artist.name} artist={artist} />
