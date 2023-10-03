@@ -7,16 +7,21 @@ function App(): JSX.Element {
   const month: Array<artistItem> = [];
   const year: Array<artistItem> = [];
   const allTime: Array<artistItem> = [];
+
   const list = [month, year, allTime];
+  const listName = ["Month", "Year", "All Time"];
+  var j = 0;
 
   list.forEach((item) => {
+    var firstName = listName[j];
     for (let i = 0; i < 5; i++) {
       const newArtist: artistItem = {
-        name: `artist ${i + 1}`,
+        name: `${firstName} Artist ${i + 1}`,
         percentage: 23,
       };
       item.push(newArtist);
     }
+    j = j + 1;
   });
 
   const TopArtistsInfo: topArtists = {

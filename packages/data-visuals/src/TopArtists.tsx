@@ -37,7 +37,7 @@ export const ArtistListItem: React.FunctionComponent<
           <Avatar {...stringAvatar(artist.name)} />
         </Grid>
         <Grid item xs={10}>
-          <Typography align="right" sx={{ fontSize: 24 }} fontWeight={600}>
+          <Typography align="right" sx={{ fontSize: 20 }} fontWeight={600}>
             {artist.name}
           </Typography>
         </Grid>
@@ -50,20 +50,39 @@ export const TopArtists: React.FunctionComponent<
   TopArtistsDisplayProps
 > = () => {
   const [underlinedButton, setUnderlinedButton] = useState(0);
+  const [artistListNum, setArtistListNum] = useState(0);
 
   const handleButtonClick = (buttonIndex: number) => {
     setUnderlinedButton(buttonIndex);
+    setArtistListNum(buttonIndex);
   };
 
   return (
     <DependenciesContext.Consumer>
       {({ TopArtistsInfo }: any) => {
+        if (!TopArtistsInfo) {
+          return null;
+        }
+        const artistListItems = [
+          TopArtistsInfo.month,
+          TopArtistsInfo.year,
+          TopArtistsInfo.allTime,
+        ];
+
         return (
           <ThemeProvider theme={mainTheme}>
+            <Typography
+              sx={{ color: "#FFFFFF", fontSize: 45 }}
+              fontWeight={800}
+              align="center"
+            >
+              Top Artists
+            </Typography>
             <Box
               sx={{
                 backgroundColor: "#535353",
                 borderRadius: "10%",
+                width: "auto",
               }}
             >
               <Container>
@@ -137,7 +156,7 @@ export const TopArtists: React.FunctionComponent<
                   </Button>
                 </div>
                 <List>
-                  {TopArtistsInfo.month.map((artist: artistItem) => (
+                  {artistListItems[artistListNum].map((artist: artistItem) => (
                     <ArtistListItem key={artist.name} artist={artist} />
                   ))}
                 </List>
