@@ -10,6 +10,7 @@ describe("test TopArtists suite", () => {
   const allTime: Array<artistItem> = [];
 
   const list = [month, year, allTime];
+  const listName = ["Month", "Year", "All Time"];
 
   list.forEach((item) => {
     for (let i = 0; i < 5; i++) {
