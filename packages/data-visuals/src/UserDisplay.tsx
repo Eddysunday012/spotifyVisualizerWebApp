@@ -9,9 +9,7 @@ import {
   Button,
 } from "@mui/material";
 import { userDisplay } from "types";
-// import { signOut } from "next-auth/react";
 import mainTheme from "theme";
-// import Profile from "./img/Profile.png";
 
 export interface UserDisplayProps extends PropsWithChildren {}
 
