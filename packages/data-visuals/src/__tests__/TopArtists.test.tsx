@@ -53,7 +53,7 @@ describe("test TopArtists suite", () => {
     );
   });
 
-  it("should change to specific month/year/all time when clicke on", async () => {
+  it("should change to specific month/year/all time when clicked on", async () => {
     list.forEach((item) => {
       var firstName = listName[j];
       for (let i = 0; i < 5; i++) {

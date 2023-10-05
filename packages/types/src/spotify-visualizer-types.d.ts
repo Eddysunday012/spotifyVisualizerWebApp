@@ -43,6 +43,10 @@ export interface artistItem {
 
 export interface songItem {
   name: string;
+  artist: string;
+  album: string;
+  img: string;
+  duration: number;
 }
 
 export interface timeStamp {

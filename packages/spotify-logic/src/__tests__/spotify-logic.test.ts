@@ -23,14 +23,45 @@ describe("getTopSongs testing suite", () => {
         // Your example Spotify songs here
         {
           name: "Song 1",
-          artist: "Artist 1",
-        },
-        {
-          name: "Song 2",
-          artist: "Artist 2",
+          artists: [
+            {
+              name: "Artist Name",
+            },
+          ],
+          album: {
+            name: "Album Name",
+            images: [
+              {
+                url: "https://i.scdn.co/image/ab67616d0000b27396c70887c108c7f17640336f",
+                height: 640,
+                width: 640,
+              },
+              {
+                url: "https://i.scdn.co/image/ab67616d00001e0296c70887c108c7f17640336f",
+                height: 300,
+                width: 300,
+              },
+              {
+                url: "https://i.scdn.co/image/ab67616d0000485196c70887c108c7f17640336f",
+                height: 64,
+                width: 64,
+              },
+            ],
+          },
+          duration: 1000,
         },
       ],
     };
+
+    const resultData = [
+      {
+        name: "Song 1",
+        artist: "Artist Name",
+        album: "Album Name",
+        img: "https://i.scdn.co/image/ab67616d0000485196c70887c108c7f17640336f",
+        duration: 1000,
+      },
+    ];
 
     // Mock a successful response
     mockResponse(exampleData);
@@ -39,10 +70,10 @@ describe("getTopSongs testing suite", () => {
     const accessToken = "your-access-token";
 
     // Call the function
-    const result = await getTopSongs(accessToken);
+    const result = await getTopSongs(accessToken, "short_term");
 
     // Assert the result
-    expect(result).toEqual(exampleData.items);
+    expect(result).toEqual(resultData);
   });
 
   it("handles fetch failure", async () => {
@@ -53,7 +84,7 @@ describe("getTopSongs testing suite", () => {
     const accessToken = "your-access-token";
 
     // Call the function and expect it to throw an error
-    await expect(getTopSongs(accessToken)).rejects.toThrowError(
+    await expect(getTopSongs(accessToken, "short_term")).rejects.toThrowError(
       "Failed to fetch top tracks"
     );
   });

@@ -1,8 +1,8 @@
-import { artistItem } from "types";
+import { artistItem, songItem } from "types";
 
-export async function getTopSongs(accessToken: any) {
+export async function getTopSongs(accessToken: any, term: string) {
   const response = await fetch(
-    "https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=50",
+    `https://api.spotify.com/v1/me/top/artists?time_range=${term}&limit=5`,
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -16,7 +16,21 @@ export async function getTopSongs(accessToken: any) {
   }
 
   const data = await response.json();
-  return data.items; // Assuming the response contains an "items" array of top tracks.
+
+  const TopSongsInfo: Array<songItem> = [];
+
+  data.items.forEach((song: any) => {
+    var newSongItem: songItem = {
+      name: song.name,
+      artist: song.artists[0].name,
+      album: song.album.name,
+      img: song.album.images[2].url,
+      duration: song.duration,
+    };
+    TopSongsInfo.push(newSongItem);
+  });
+
+  return TopSongsInfo; // Assuming the response contains an "items" array of top tracks.
 }
 
 export async function getTopArtists(accessToken: any, term: string) {
@@ -29,7 +43,7 @@ export async function getTopArtists(accessToken: any, term: string) {
     }
   );
   if (!response.ok) {
-    console.log(response);
+    // console.log(response);
     throw new Error("Failed to fetch top artists");
   }
 
