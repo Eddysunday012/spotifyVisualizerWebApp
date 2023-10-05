@@ -3,6 +3,7 @@ import { DependenciesContext } from "dependencies-context";
 import { topArtists, artistItem } from "types";
 import React from "react";
 import { Switch } from "@mui/material";
+import artistPic from "./assets/artistPic.png";
 
 function App(): JSX.Element {
   const month: Array<artistItem> = [];
@@ -18,6 +19,7 @@ function App(): JSX.Element {
     for (let i = 0; i < 5; i++) {
       const newArtist: artistItem = {
         name: `${firstName} Artist ${i + 1}`,
+        img: artistPic,
         percentage: 23,
       };
       item.push(newArtist);

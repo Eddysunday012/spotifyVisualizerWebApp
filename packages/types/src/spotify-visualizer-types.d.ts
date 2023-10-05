@@ -30,9 +30,9 @@ export interface topArtists {
 }
 
 export interface topTracks {
-  month: Array<songItem>;
-  year: Array<songItem>;
-  allTime: Array<songItem>;
+  month?: Array<songItem>;
+  year?: Array<songItem>;
+  allTime?: Array<songItem>;
 }
 
 export interface artistItem {

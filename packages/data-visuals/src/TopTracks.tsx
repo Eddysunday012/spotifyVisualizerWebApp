@@ -20,14 +20,33 @@ interface SongListItemDisplayProps {
   song: songItem;
 }
 
+function millisecondsToMinutesAndSeconds(milliseconds: number): string {
+  // Calculate minutes and seconds
+  const totalSeconds = Math.floor(milliseconds / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  // Format the result as "m:ss" (e.g., "0:06" or "3:40")
+  const formattedTime = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+
+  return formattedTime;
+}
+
 export const SongListItem: React.FunctionComponent<
   SongListItemDisplayProps
 > = ({ song }) => {
+  const ImageMyStyle = {
+    maxWidth: "33px",
+    maxHeight: "33px",
+    flex: 1,
+    resizeMode: "contain",
+  };
+
   return (
     <ListItem key={song.name} alignItems="center">
       <Grid container alignItems="flex-end">
-        <Grid item xs={2}>
-          <img src={song.img} />
+        <Grid item xs={3}>
+          <img style={ImageMyStyle} src={song.img} />
         </Grid>
         <Grid item xs={4}>
           <Typography
@@ -46,7 +65,7 @@ export const SongListItem: React.FunctionComponent<
             color="#FFFFFF"
             fontWeight={600}
           >
-            {song.duration}
+            {millisecondsToMinutesAndSeconds(song.duration)}
           </Typography>
         </Grid>
       </Grid>
@@ -83,7 +102,7 @@ export const TopTracks: React.FunctionComponent<TopTracksDisplayProps> = () => {
                 fontWeight={800}
                 align="center"
               >
-                Top Artists
+                Top Tracks
               </Typography>
               <Box
                 sx={{
