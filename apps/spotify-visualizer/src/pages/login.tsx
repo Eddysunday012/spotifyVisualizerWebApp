@@ -44,7 +44,7 @@ export default function Login({ providers }: any) {
                       signIn(provider.id, { callbackUrl: "/" });
                     }}
                     size="large"
-                    style={{ borderRadius: "10%" }}
+                    style={{ borderRadius: "16px" }}
                     sx={{
                       backgroundColor: "#1DB954",
                     }}

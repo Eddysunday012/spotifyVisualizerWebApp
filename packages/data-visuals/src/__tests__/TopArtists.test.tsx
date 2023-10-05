@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import { TopArtists } from "../TopArtists";
 import { DependenciesContext } from "dependencies-context";
 import { topArtists, artistItem } from "types";
+import artistPic from "../img/artistPic.png";
 
 describe("test TopArtists suite", () => {
   const month: Array<artistItem> = [];
@@ -20,6 +21,7 @@ describe("test TopArtists suite", () => {
         const newArtist: artistItem = {
           name: `${firstName} Artist ${i + 1}`,
           percentage: 23,
+          img: artistPic,
         };
         item.push(newArtist);
       }
@@ -58,6 +60,7 @@ describe("test TopArtists suite", () => {
         const newArtist: artistItem = {
           name: `${firstName} Artist ${i + 1}`,
           percentage: 23,
+          img: artistPic,
         };
         item.push(newArtist);
       }
@@ -84,5 +87,18 @@ describe("test TopArtists suite", () => {
     const monthButton = screen.getByText("Month");
     fireEvent.click(monthButton);
     expect(screen.getByText(month[0].name)).toBeTruthy();
+  });
+
+  it("should render if no information for each", async () => {
+    const TopArtistsInfo = {
+      month: undefined,
+      year: undefined,
+      allTime: undefined,
+    };
+    render(
+      <DependenciesContext.Provider value={{ TopArtistsInfo }}>
+        <TopArtists />
+      </DependenciesContext.Provider>
+    );
   });
 });

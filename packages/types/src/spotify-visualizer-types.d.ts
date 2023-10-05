@@ -24,9 +24,9 @@ export interface userDisplay {
 }
 
 export interface topArtists {
-  month: Array<artistItem>;
-  year: Array<artistItem>;
-  allTime: Array<artistItem>;
+  month?: Array<artistItem>;
+  year?: Array<artistItem>;
+  allTime?: Array<artistItem>;
 }
 
 export interface topTracks {
@@ -37,6 +37,7 @@ export interface topTracks {
 
 export interface artistItem {
   name: string;
+  img: string;
   percentage: number;
 }
 

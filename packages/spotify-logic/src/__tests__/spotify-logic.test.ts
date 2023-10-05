@@ -88,7 +88,7 @@ describe("getTopArtists testing suite", () => {
     const accessToken = "your-access-token";
 
     // Call the function
-    const result = await getTopArtists(accessToken);
+    const result = await getTopArtists(accessToken, "long-term");
 
     // Assert the result
     expect(result).toEqual(exampleData.items);
@@ -102,7 +102,7 @@ describe("getTopArtists testing suite", () => {
     const accessToken = "your-access-token";
 
     // Call the function and expect it to throw an error
-    await expect(getTopArtists(accessToken)).rejects.toThrowError(
+    await expect(getTopArtists(accessToken, "long-term")).rejects.toThrowError(
       "Failed to fetch top tracks"
     );
   });

@@ -2,6 +2,7 @@ import { TopArtists } from "data-visuals";
 import { DependenciesContext } from "dependencies-context";
 import { topArtists, artistItem } from "types";
 import React from "react";
+import { Switch } from "@mui/material";
 
 function App(): JSX.Element {
   const month: Array<artistItem> = [];
@@ -24,14 +25,34 @@ function App(): JSX.Element {
     j = j + 1;
   });
 
-  const TopArtistsInfo: topArtists = {
+  const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+
+  const handleSwitchChange = () => {
+    setIsSwitchOn(!isSwitchOn); // Toggle the switch state
+  };
+
+  var TopArtistsInfo: topArtists = {
     month: month,
     year: year,
     allTime: allTime,
   };
 
+  if (!isSwitchOn) {
+    TopArtistsInfo = {
+      month: undefined,
+      year: undefined,
+      allTime: undefined,
+    };
+  }
+
   return (
     <>
+      <Switch
+        checked={isSwitchOn}
+        onChange={handleSwitchChange}
+        color="primary" // Change the color as needed
+      />
+      {isSwitchOn ? "Not Loading" : "Loading"}
       <DependenciesContext.Provider value={{ TopArtistsInfo }}>
         <TopArtists />
       </DependenciesContext.Provider>
