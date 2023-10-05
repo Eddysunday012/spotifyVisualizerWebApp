@@ -68,18 +68,40 @@ describe("getTopArtists testing suite", () => {
     jest.restoreAllMocks();
   });
 
-  it("fetches top songs successfully", async () => {
+  it("fetches top artists successfully", async () => {
     const exampleData = {
       items: [
-        // Your example Spotify songs here
         {
-          artist: "Artist 1",
-        },
-        {
-          artist: "Artist 2",
+          name: "Artist 1",
+          percentage: 23,
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+              height: 300,
+              width: 300,
+            },
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+              height: 300,
+              width: 300,
+            },
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+              height: 300,
+              width: 300,
+            },
+          ],
         },
       ],
     };
+
+    const resultData = [
+      {
+        name: "Artist 1",
+        percentage: 23,
+        img: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+      },
+    ];
 
     // Mock a successful response
     mockResponse(exampleData);
@@ -91,7 +113,7 @@ describe("getTopArtists testing suite", () => {
     const result = await getTopArtists(accessToken, "long-term");
 
     // Assert the result
-    expect(result).toEqual(exampleData.items);
+    expect(result).toEqual(resultData);
   });
 
   it("handles fetch failure", async () => {
@@ -103,7 +125,7 @@ describe("getTopArtists testing suite", () => {
 
     // Call the function and expect it to throw an error
     await expect(getTopArtists(accessToken, "long-term")).rejects.toThrowError(
-      "Failed to fetch top tracks"
+      "Failed to fetch top artists"
     );
   });
 });

@@ -146,8 +146,18 @@ export const UserDisplay: React.FunctionComponent<UserDisplayProps> = () => {
                     <Button
                       variant="contained"
                       onClick={() => profileData.signOut()}
+                      size="large"
+                      style={{ borderRadius: "16px" }}
+                      sx={{
+                        backgroundColor: "#1DB954",
+                      }}
                     >
-                      Sign Out
+                      <Typography
+                        fontWeight={800}
+                        sx={{ textTransform: "capitalize", color: "#212121" }}
+                      >
+                        Sign Out
+                      </Typography>
                     </Button>
                   </Grid>
                 </Grid>
