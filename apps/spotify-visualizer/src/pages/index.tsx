@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import { useSession, signOut, signIn } from "next-auth/react";
 import { getTopArtists, getTopSongs, getUserProfile } from "spotify-logic";
 import { useState, useEffect } from "react";
-import { TopArtists, UserDisplay } from "data-visuals";
+import { TopArtists, TopTracks, UserDisplay } from "data-visuals";
 import { DependenciesContext } from "dependencies-context";
 import { getUserPlaylistNum } from "spotify-logic/src/spotify-logic";
 import {
@@ -27,7 +27,7 @@ export const themeDark = createTheme({
 
 export default function Home() {
   const { data: session, status } = useSession();
-  const [topTracks, setTopTracks] = useState([]);
+  const [TopTracksInfo, setTopTracksInfo] = useState({});
   const [profile, setProfile] = useState({});
   const [UserDisplayInfo, setUserDisplayInfo] = useState({});
   const [TopArtistsInfo, setTopArtistsInfo] = useState({});
@@ -37,9 +37,21 @@ export default function Home() {
     async function fetchData() {
       if (session && session.user && session.user.accessToken) {
         let accessToken = session?.user?.accessToken;
-        const songs = await getTopSongs(accessToken);
+
         const userProfile = await getUserProfile(accessToken);
         const numPlaylists = await getUserPlaylistNum(accessToken);
+        const TopTracksInfo_month = await getTopSongs(
+          accessToken,
+          "short_term"
+        );
+        const TopTracksInfo_year = await getTopSongs(
+          accessToken,
+          "medium_term"
+        );
+        const TopTracksInfo_allTime = await getTopSongs(
+          accessToken,
+          "long_term"
+        );
         const TopArtistsInfo_month = await getTopArtists(
           accessToken,
           "short_term"
@@ -53,7 +65,9 @@ export default function Home() {
           "long_term"
         );
         return {
-          songs,
+          TopTracksInfo_month,
+          TopTracksInfo_year,
+          TopTracksInfo_allTime,
           userProfile,
           numPlaylists,
           TopArtistsInfo_month,
@@ -64,7 +78,6 @@ export default function Home() {
     }
 
     fetchData().then((result) => {
-      // console.log(result?.userProfile);
       setUserDisplayInfo({
         profilePic: result?.userProfile.images[1].url,
         name: result?.userProfile.display_name,
@@ -80,7 +93,12 @@ export default function Home() {
         allTime: result?.TopArtistsInfo_allTime,
       });
 
-      setTopTracks(result?.songs);
+      setTopTracksInfo({
+        month: result?.TopTracksInfo_month,
+        year: result?.TopTracksInfo_year,
+        allTime: result?.TopTracksInfo_allTime,
+      });
+
       setProfile(result?.userProfile);
       setLoading(false);
     });
@@ -92,7 +110,7 @@ export default function Home() {
         <p>Loading...</p>
       ) : (
         <DependenciesContext.Provider
-          value={{ UserDisplayInfo, TopArtistsInfo }}
+          value={{ UserDisplayInfo, TopArtistsInfo, TopTracksInfo }}
         >
           <ThemeProvider theme={themeDark}>
             <Box
@@ -110,8 +128,11 @@ export default function Home() {
                   <UserDisplay />
                 </Grid>
                 <Grid item container xs={8}>
-                  <Grid container item xs={4}>
+                  <Grid container item xs={6}>
                     <TopArtists />
+                  </Grid>
+                  <Grid container item xs={6}>
+                    <TopTracks />
                   </Grid>
                 </Grid>
               </Grid>

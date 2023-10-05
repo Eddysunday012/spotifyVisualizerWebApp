@@ -36,8 +36,8 @@ export const SongListItem: React.FunctionComponent<
   SongListItemDisplayProps
 > = ({ song }) => {
   const ImageMyStyle = {
-    maxWidth: "33px",
-    maxHeight: "33px",
+    maxWidth: "36px",
+    maxHeight: "36px",
     flex: 1,
     resizeMode: "contain",
   };
@@ -54,6 +54,12 @@ export const SongListItem: React.FunctionComponent<
             sx={{ fontSize: 20 }}
             color="#FFFFFF"
             fontWeight={600}
+            style={{
+              overflow: "hidden", // Hide any overflowing content
+              textOverflow: "ellipsis", // Display an ellipsis (...) for truncated content
+              whiteSpace: "nowrap", // Prevents line breaks within the text
+              maxWidth: "100%", // Adjust the maximum width as needed
+            }}
           >
             {song.name}
           </Typography>
