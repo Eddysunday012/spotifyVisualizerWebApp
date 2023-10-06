@@ -56,5 +56,5 @@ export interface timeStamp {
 
 export interface genreItem {
   name: string;
-  hours: number;
+  numSongs: number;
 }
