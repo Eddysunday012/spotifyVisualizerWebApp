@@ -34,9 +34,11 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.10",
     "axios": "^1.5.0",
+    "chart.js": "^4.4.0",
     "d3": "^7.8.5",
     "framer-motion": "^10.16.4",
     "next-auth": "latest",
+    "react-chartjs-2": "^5.2.0",
     "spotify-web-api-node": "^5.0.2"
   }
 }
