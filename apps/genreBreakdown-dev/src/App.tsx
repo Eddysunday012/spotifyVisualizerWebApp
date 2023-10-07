@@ -14,7 +14,7 @@ function App(): JSX.Element {
   return (
     <>
       <DependenciesContext.Provider value={GenreBreakdownInfo}>
-        <GenreBreakdown data={data} width={400} height={400} />
+        <GenreBreakdown />
       </DependenciesContext.Provider>
     </>
   );
