@@ -114,7 +114,7 @@ export const TopTracks: React.FunctionComponent<TopTracksDisplayProps> = () => {
                 sx={{
                   backgroundColor: "#535353",
                   borderRadius: "3%",
-                  width: 597,
+                  width: "auto",
                 }}
               >
                 <Container>

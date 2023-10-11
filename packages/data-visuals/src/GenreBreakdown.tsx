@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 import React from "react";
 // import { genreItem } from "types";
-// import { DependenciesContext } from "dependencies-context";
+import { DependenciesContext } from "dependencies-context";
 import { Radar } from "react-chartjs-2";
 import {
   Chart as ChartJS,

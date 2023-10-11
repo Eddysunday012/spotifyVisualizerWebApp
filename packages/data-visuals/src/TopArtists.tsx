@@ -82,7 +82,7 @@ export const TopArtists: React.FunctionComponent<
                 sx={{
                   backgroundColor: "#535353",
                   borderRadius: "3%",
-                  width: 597,
+                  width: "auto",
                 }}
               >
                 <Container>
