@@ -19,7 +19,7 @@ export async function getTopSongs(accessToken: any, term: string) {
 
   const TopSongsInfo: Array<songItem> = [];
 
-  data.items.forEach((song: any) => {
+  data.items.slice(0, 5).forEach((song: any) => {
     var newSongItem: songItem = {
       name: song.name,
       artist: song.artists[0].name,
@@ -28,6 +28,12 @@ export async function getTopSongs(accessToken: any, term: string) {
       duration: song.duration_ms,
     };
     TopSongsInfo.push(newSongItem);
+  });
+
+  const genreCountMap: Map<string, number> = new Map();
+
+  data.items.forEach((song: any) => {
+    song.albums;
   });
 
   return TopSongsInfo; // Assuming the response contains an "items" array of top tracks.

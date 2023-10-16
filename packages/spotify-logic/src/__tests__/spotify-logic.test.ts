@@ -5,6 +5,7 @@ import {
   getUserProfile,
 } from "../spotify-logic";
 import { mockResponse, mockedFetch } from "../MockedFetch";
+import { testData } from "./testData";
 
 global.fetch = mockedFetch;
 
@@ -259,5 +260,61 @@ describe("getUserPlaylistNum testing suite", () => {
     await expect(getUserPlaylistNum(accessToken)).rejects.toThrowError(
       "Failed to fetch top tracks"
     );
+  });
+});
+
+describe("getTopSongs new testing suite", () => {
+  beforeEach(() => {
+    jest.spyOn(global, "fetch").mockImplementation(mockedFetch);
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it("should return in both forms for topSongs and GenreBreakdown", async () => {
+    const exampleData = testData;
+
+    mockResponse(exampleData);
+
+    const resultData_topSongs = [
+      {
+        name: "PUPPET SHOW",
+        artist: "XG",
+        album: "NEW DNA",
+        img: "https://i.scdn.co/image/ab67616d00004851e9b58064013b722f09296b3e",
+        duration: 199960,
+      },
+      {
+        name: "Always",
+        artist: "Daniel Caesar",
+        album: "NEVER ENOUGH",
+        img: "https://i.scdn.co/image/ab67616d000048517c68face1dc58127f3a7b1cc",
+        duration: 225312,
+      },
+      {
+        name: "In Bloom",
+        artist: "ZEROBASEONE",
+        album: "YOUTH IN THE SHADE",
+        img: "https://i.scdn.co/image/ab67616d0000485112062f95939fd4de9def44e7",
+        duration: 180988,
+      },
+      {
+        name: "Lovesick",
+        artist: "Laufey",
+        album: "Bewitched",
+        img: "https://i.scdn.co/image/ab67616d0000485174c732f8aa0e0ccbb3d17d96",
+        duration: 225360,
+      },
+      {
+        name: "Binibini",
+        artist: "Zack Tabudlo",
+        album: "Episode",
+        img: "https://i.scdn.co/image/ab67616d000048510acfd1cc37e7d4eacfa49c48",
+        duration: 221538,
+      },
+    ];
+
+    const resultData_genreBreakdown = { genres: [], nums: [] };
   });
 });
