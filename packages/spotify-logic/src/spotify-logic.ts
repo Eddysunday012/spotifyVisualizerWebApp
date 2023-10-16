@@ -2,7 +2,7 @@ import { artistItem, songItem } from "types";
 
 export async function getTopSongs(accessToken: any, term: string) {
   const response = await fetch(
-    `https://api.spotify.com/v1/me/top/tracks?time_range=${term}&limit=5`,
+    `https://api.spotify.com/v1/me/top/tracks?time_range=${term}&limit=50`,
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -30,11 +30,9 @@ export async function getTopSongs(accessToken: any, term: string) {
     TopSongsInfo.push(newSongItem);
   });
 
-  const genreCountMap: Map<string, number> = new Map();
-
-  data.items.forEach((song: any) => {
-    song.albums;
-  });
+  // data.items.forEach((song: any) => {
+  //   song.albums;
+  // });
 
   return TopSongsInfo; // Assuming the response contains an "items" array of top tracks.
 }

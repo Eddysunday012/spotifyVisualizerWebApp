@@ -5,91 +5,91 @@ import {
   getUserProfile,
 } from "../spotify-logic";
 import { mockResponse, mockedFetch } from "../MockedFetch";
-import { testData } from "./testData";
+import { testData } from "../testData";
 
 global.fetch = mockedFetch;
 
-describe("getTopSongs testing suite", () => {
-  beforeEach(() => {
-    jest.spyOn(global, "fetch").mockImplementation(mockedFetch);
-  });
+// describe("getTopSongs testing suite", () => {
+//   beforeEach(() => {
+//     jest.spyOn(global, "fetch").mockImplementation(mockedFetch);
+//   });
 
-  afterEach(() => {
-    jest.restoreAllMocks();
-  });
+//   afterEach(() => {
+//     jest.restoreAllMocks();
+//   });
 
-  it("fetches top songs successfully", async () => {
-    const exampleData = {
-      items: [
-        // Your example Spotify songs here
-        {
-          name: "Song 1",
-          artists: [
-            {
-              name: "Artist Name",
-            },
-          ],
-          album: {
-            name: "Album Name",
-            images: [
-              {
-                url: "https://i.scdn.co/image/ab67616d0000b27396c70887c108c7f17640336f",
-                height: 640,
-                width: 640,
-              },
-              {
-                url: "https://i.scdn.co/image/ab67616d00001e0296c70887c108c7f17640336f",
-                height: 300,
-                width: 300,
-              },
-              {
-                url: "https://i.scdn.co/image/ab67616d0000485196c70887c108c7f17640336f",
-                height: 64,
-                width: 64,
-              },
-            ],
-          },
-          duration: 1000,
-        },
-      ],
-    };
+//   it("fetches top songs successfully", async () => {
+//     const exampleData = {
+//       items: [
+//         // Your example Spotify songs here
+//         {
+//           name: "Song 1",
+//           artists: [
+//             {
+//               name: "Artist Name",
+//             },
+//           ],
+//           album: {
+//             name: "Album Name",
+//             images: [
+//               {
+//                 url: "https://i.scdn.co/image/ab67616d0000b27396c70887c108c7f17640336f",
+//                 height: 640,
+//                 width: 640,
+//               },
+//               {
+//                 url: "https://i.scdn.co/image/ab67616d00001e0296c70887c108c7f17640336f",
+//                 height: 300,
+//                 width: 300,
+//               },
+//               {
+//                 url: "https://i.scdn.co/image/ab67616d0000485196c70887c108c7f17640336f",
+//                 height: 64,
+//                 width: 64,
+//               },
+//             ],
+//           },
+//           duration: 1000,
+//         },
+//       ],
+//     };
 
-    const resultData = [
-      {
-        name: "Song 1",
-        artist: "Artist Name",
-        album: "Album Name",
-        img: "https://i.scdn.co/image/ab67616d0000485196c70887c108c7f17640336f",
-        duration: 1000,
-      },
-    ];
+//     const resultData = [
+//       {
+//         name: "Song 1",
+//         artist: "Artist Name",
+//         album: "Album Name",
+//         img: "https://i.scdn.co/image/ab67616d0000485196c70887c108c7f17640336f",
+//         duration: 1000,
+//       },
+//     ];
 
-    // Mock a successful response
-    mockResponse(exampleData);
+//     // Mock a successful response
+//     mockResponse(exampleData);
 
-    // Mock the access token
-    const accessToken = "your-access-token";
+//     // Mock the access token
+//     const accessToken = "your-access-token";
 
-    // Call the function
-    const result = await getTopSongs(accessToken, "short_term");
+//     // Call the function
+//     const result = await getTopSongs(accessToken, "short_term");
 
-    // Assert the result
-    expect(result).toEqual(resultData);
-  });
+//     // Assert the result
+//     expect(result).toEqual(resultData);
+//   });
 
-  it("handles fetch failure", async () => {
-    // Mock a failed response
-    mockResponse({}, 401); // For example, unauthorized error
+//   it("handles fetch failure", async () => {
+//     // Mock a failed response
+//     mockResponse({}, 401); // For example, unauthorized error
 
-    // Mock the access token
-    const accessToken = "your-access-token";
+//     // Mock the access token
+//     const accessToken = "your-access-token";
 
-    // Call the function and expect it to throw an error
-    await expect(getTopSongs(accessToken, "short_term")).rejects.toThrowError(
-      "Failed to fetch top tracks"
-    );
-  });
-});
+//     // Call the function and expect it to throw an error
+//     await expect(getTopSongs(accessToken, "short_term")).rejects.toThrowError(
+//       "Failed to fetch top tracks"
+//     );
+//   });
+// });
 
 describe("getTopArtists testing suite", () => {
   beforeEach(() => {
@@ -315,6 +315,27 @@ describe("getTopSongs new testing suite", () => {
       },
     ];
 
-    const resultData_genreBreakdown = { genres: [], nums: [] };
+    // const resultData_genreBreakdown = { genres: [], nums: [] };
+    // Mock the access token
+    const accessToken = "your-access-token";
+
+    // Call the function
+    const result = await getTopSongs(accessToken, "short_term");
+
+    // Assert the result
+    expect(result).toEqual(resultData_topSongs);
+  });
+
+  it("handles fetch failure", async () => {
+    // Mock a failed response
+    mockResponse({}, 401); // For example, unauthorized error
+
+    // Mock the access token
+    const accessToken = "your-access-token";
+
+    // Call the function and expect it to throw an error
+    await expect(getTopSongs(accessToken, "short_term")).rejects.toThrowError(
+      "Failed to fetch top tracks"
+    );
   });
 });
