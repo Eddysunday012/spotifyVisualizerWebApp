@@ -94,12 +94,12 @@ export default function Home() {
       });
 
       setTopTracksInfo({
-        month: result?.TopTracksInfo_month,
-        year: result?.TopTracksInfo_year,
-        allTime: result?.TopTracksInfo_allTime,
+        month: result?.TopTracksInfo_month.TopSongsInfo,
+        year: result?.TopTracksInfo_year.TopSongsInfo,
+        allTime: result?.TopTracksInfo_allTime.TopSongsInfo,
       });
 
-      setProfile(result?.userProfile);
+      // setProfile(result?.userProfile);
       setLoading(false);
     });
   }, [session]);

@@ -76,7 +76,7 @@ export async function getTopArtists(accessToken: any, term: string) {
 
   const TopArtistsInfo: Array<artistItem> = [];
 
-  data.items.forEach((artist: any) => {
+  data.items.slice(0, 5).forEach((artist: any) => {
     var newArtistItem: artistItem = {
       name: artist.name,
       percentage: 23,

@@ -121,10 +121,114 @@ describe("getTopArtists testing suite", () => {
             },
           ],
         },
+        {
+          name: "Artist 1",
+          percentage: 23,
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+              height: 300,
+              width: 300,
+            },
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+              height: 300,
+              width: 300,
+            },
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+              height: 300,
+              width: 300,
+            },
+          ],
+        },
+        {
+          name: "Artist 1",
+          percentage: 23,
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+              height: 300,
+              width: 300,
+            },
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+              height: 300,
+              width: 300,
+            },
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+              height: 300,
+              width: 300,
+            },
+          ],
+        },
+        {
+          name: "Artist 1",
+          percentage: 23,
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+              height: 300,
+              width: 300,
+            },
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+              height: 300,
+              width: 300,
+            },
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+              height: 300,
+              width: 300,
+            },
+          ],
+        },
+        {
+          name: "Artist 1",
+          percentage: 23,
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+              height: 300,
+              width: 300,
+            },
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+              height: 300,
+              width: 300,
+            },
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+              height: 300,
+              width: 300,
+            },
+          ],
+        },
       ],
     };
 
     const resultData = [
+      {
+        name: "Artist 1",
+        percentage: 23,
+        img: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+      },
+      {
+        name: "Artist 1",
+        percentage: 23,
+        img: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+      },
+      {
+        name: "Artist 1",
+        percentage: 23,
+        img: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+      },
+      {
+        name: "Artist 1",
+        percentage: 23,
+        img: "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+      },
       {
         name: "Artist 1",
         percentage: 23,
