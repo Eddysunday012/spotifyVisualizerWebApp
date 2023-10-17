@@ -1,95 +1,92 @@
 import {
   getTopArtists,
+  getTopGenresFromArtists,
   getTopSongs,
   getUserPlaylistNum,
   getUserProfile,
 } from "../spotify-logic";
 import { mockResponse, mockedFetch } from "../MockedFetch";
-import { testData } from "../testData";
+import { testData_tracks } from "../testData_tracks";
+import { responseData_severalArtists } from "../testData_artists";
 
 global.fetch = mockedFetch;
 
-// describe("getTopSongs testing suite", () => {
-//   beforeEach(() => {
-//     jest.spyOn(global, "fetch").mockImplementation(mockedFetch);
-//   });
+describe("getTopSongs testing suite", () => {
+  beforeEach(() => {
+    jest.spyOn(global, "fetch").mockImplementation(mockedFetch);
+  });
 
-//   afterEach(() => {
-//     jest.restoreAllMocks();
-//   });
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
 
-//   it("fetches top songs successfully", async () => {
-//     const exampleData = {
-//       items: [
-//         // Your example Spotify songs here
-//         {
-//           name: "Song 1",
-//           artists: [
-//             {
-//               name: "Artist Name",
-//             },
-//           ],
-//           album: {
-//             name: "Album Name",
-//             images: [
-//               {
-//                 url: "https://i.scdn.co/image/ab67616d0000b27396c70887c108c7f17640336f",
-//                 height: 640,
-//                 width: 640,
-//               },
-//               {
-//                 url: "https://i.scdn.co/image/ab67616d00001e0296c70887c108c7f17640336f",
-//                 height: 300,
-//                 width: 300,
-//               },
-//               {
-//                 url: "https://i.scdn.co/image/ab67616d0000485196c70887c108c7f17640336f",
-//                 height: 64,
-//                 width: 64,
-//               },
-//             ],
-//           },
-//           duration: 1000,
-//         },
-//       ],
-//     };
+  it("should return in both forms for topSongs and GenreBreakdown", async () => {
+    const exampleData = testData_tracks;
 
-//     const resultData = [
-//       {
-//         name: "Song 1",
-//         artist: "Artist Name",
-//         album: "Album Name",
-//         img: "https://i.scdn.co/image/ab67616d0000485196c70887c108c7f17640336f",
-//         duration: 1000,
-//       },
-//     ];
+    mockResponse(exampleData);
 
-//     // Mock a successful response
-//     mockResponse(exampleData);
+    const resultData_topSongs = [
+      {
+        name: "PUPPET SHOW",
+        artist: "XG",
+        album: "NEW DNA",
+        img: "https://i.scdn.co/image/ab67616d00004851e9b58064013b722f09296b3e",
+        duration: 199960,
+      },
+      {
+        name: "Always",
+        artist: "Daniel Caesar",
+        album: "NEVER ENOUGH",
+        img: "https://i.scdn.co/image/ab67616d000048517c68face1dc58127f3a7b1cc",
+        duration: 225312,
+      },
+      {
+        name: "In Bloom",
+        artist: "ZEROBASEONE",
+        album: "YOUTH IN THE SHADE",
+        img: "https://i.scdn.co/image/ab67616d0000485112062f95939fd4de9def44e7",
+        duration: 180988,
+      },
+      {
+        name: "Lovesick",
+        artist: "Laufey",
+        album: "Bewitched",
+        img: "https://i.scdn.co/image/ab67616d0000485174c732f8aa0e0ccbb3d17d96",
+        duration: 225360,
+      },
+      {
+        name: "Binibini",
+        artist: "Zack Tabudlo",
+        album: "Episode",
+        img: "https://i.scdn.co/image/ab67616d000048510acfd1cc37e7d4eacfa49c48",
+        duration: 221538,
+      },
+    ];
 
-//     // Mock the access token
-//     const accessToken = "your-access-token";
+    // const resultData_genreBreakdown = { genres: [], nums: [] };
+    // Mock the access token
+    const accessToken = "your-access-token";
 
-//     // Call the function
-//     const result = await getTopSongs(accessToken, "short_term");
+    // Call the function
+    const result = await getTopSongs(accessToken, "short_term");
 
-//     // Assert the result
-//     expect(result).toEqual(resultData);
-//   });
+    // Assert the result
+    expect(result.TopSongsInfo).toEqual(resultData_topSongs);
+  });
 
-//   it("handles fetch failure", async () => {
-//     // Mock a failed response
-//     mockResponse({}, 401); // For example, unauthorized error
+  it("handles fetch failure", async () => {
+    // Mock a failed response
+    mockResponse({}, 401); // For example, unauthorized error
 
-//     // Mock the access token
-//     const accessToken = "your-access-token";
+    // Mock the access token
+    const accessToken = "your-access-token";
 
-//     // Call the function and expect it to throw an error
-//     await expect(getTopSongs(accessToken, "short_term")).rejects.toThrowError(
-//       "Failed to fetch top tracks"
-//     );
-//   });
-// });
+    // Call the function and expect it to throw an error
+    await expect(getTopSongs(accessToken, "short_term")).rejects.toThrowError(
+      "Failed to fetch top tracks"
+    );
+  });
+});
 
 describe("getTopArtists testing suite", () => {
   beforeEach(() => {
@@ -263,7 +260,7 @@ describe("getUserPlaylistNum testing suite", () => {
   });
 });
 
-describe("getTopSongs new testing suite", () => {
+describe("getTopGenresFromArtists testing suite", () => {
   beforeEach(() => {
     jest.spyOn(global, "fetch").mockImplementation(mockedFetch);
   });
@@ -272,70 +269,23 @@ describe("getTopSongs new testing suite", () => {
     jest.restoreAllMocks();
   });
 
-  it("should return in both forms for topSongs and GenreBreakdown", async () => {
-    const exampleData = testData;
-
-    mockResponse(exampleData);
-
-    const resultData_topSongs = [
-      {
-        name: "PUPPET SHOW",
-        artist: "XG",
-        album: "NEW DNA",
-        img: "https://i.scdn.co/image/ab67616d00004851e9b58064013b722f09296b3e",
-        duration: 199960,
-      },
-      {
-        name: "Always",
-        artist: "Daniel Caesar",
-        album: "NEVER ENOUGH",
-        img: "https://i.scdn.co/image/ab67616d000048517c68face1dc58127f3a7b1cc",
-        duration: 225312,
-      },
-      {
-        name: "In Bloom",
-        artist: "ZEROBASEONE",
-        album: "YOUTH IN THE SHADE",
-        img: "https://i.scdn.co/image/ab67616d0000485112062f95939fd4de9def44e7",
-        duration: 180988,
-      },
-      {
-        name: "Lovesick",
-        artist: "Laufey",
-        album: "Bewitched",
-        img: "https://i.scdn.co/image/ab67616d0000485174c732f8aa0e0ccbb3d17d96",
-        duration: 225360,
-      },
-      {
-        name: "Binibini",
-        artist: "Zack Tabudlo",
-        album: "Episode",
-        img: "https://i.scdn.co/image/ab67616d000048510acfd1cc37e7d4eacfa49c48",
-        duration: 221538,
-      },
+  it("should retrieve a list of Top Genres From List of Artist Ids", async () => {
+    const exampleData = [
+      "0LOK81e9H5lr61HlGGHqwA",
+      "7cjg7EkeZy3OI5o9Qthc6n",
+      "6HaGTQPmzraVmaVxvz6EUc",
+      "6OwKE9Ez6ALxpTaKcT5ayv",
+      "6HvZYsbFfjnjFrWF950C9d",
     ];
 
-    // const resultData_genreBreakdown = { genres: [], nums: [] };
-    // Mock the access token
-    const accessToken = "your-access-token";
+    mockResponse(responseData_severalArtists);
 
-    // Call the function
-    const result = await getTopSongs(accessToken, "short_term");
+    const accessToken = "access-token";
 
-    // Assert the result
-    expect(result).toEqual(resultData_topSongs);
-  });
+    const resultData = { "k-pop girl group": 2, "k-pop": 3 };
 
-  it("handles fetch failure", async () => {
-    // Mock a failed response
-    mockResponse({}, 401); // For example, unauthorized error
+    const result = await getTopGenresFromArtists(accessToken, exampleData);
 
-    // Mock the access token
-    const accessToken = "your-access-token";
-
-    // Call the function and expect it to throw an error
-    await expect(getTopSongs(accessToken, "short_term")).rejects.toThrowError(
-      "Failed to fetch top tracks"
-    );
+    expect(result).toEqual(resultData);
   });
 });
