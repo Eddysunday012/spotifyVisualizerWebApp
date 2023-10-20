@@ -386,7 +386,11 @@ describe("getTopGenresFromArtists testing suite", () => {
 
     const accessToken = "access-token";
 
-    const resultData = { "k-pop girl group": 2, "k-pop": 3 };
+    // const resultData = { "k-pop girl group": 2, "k-pop": 3 };
+    const resultData = {
+      genreNames: ["k-pop", "k-pop girl group"],
+      genreValues: [3, 2],
+    };
 
     const result = await getTopGenresFromArtists(accessToken, exampleData);
 

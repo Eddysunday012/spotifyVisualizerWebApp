@@ -1,20 +1,18 @@
-# Turborepo starter
+# Spotify Visualizer
 
-This is an official starter Turborepo.
+Welcome to my spotify visualizer! This next.js web app allows users to visualize their personal spotify data!
 
-## Using this example
+## Setting Up
 
-Run the following command:
+This project requires some things to start.
 
-```sh
-npx create-turbo@latest
-```
+0. Make sure to have a
 
 ## What's inside?
 
 This Turborepo includes the following packages/apps:
 
-### Apps and Packages
+### Project Structure
 
 - `docs`: a [Next.js](https://nextjs.org/) app
 - `web`: another [Next.js](https://nextjs.org/) app

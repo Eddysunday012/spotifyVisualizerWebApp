@@ -3,17 +3,13 @@ import { DependenciesContext } from "dependencies-context";
 import React from "react";
 
 function App(): JSX.Element {
-  const GenreBreakdownInfo = { bruh: "bruh" };
-  const data = [
-    { axis: "Axis 1", value: 5 },
-    { axis: "Axis 2", value: 8 },
-    { axis: "Axis 3", value: 9 },
-    { axis: "Axis 4", value: 9 },
-    { axis: "Axis 5", value: 5 },
-  ];
+  const GenreBreakdownInfo = {
+    genreNames: ["k-pop", "hip-hop", "huh", "j-pop", "fire"],
+    genreValues: [17, 15, 12, 13, 14],
+  };
   return (
     <>
-      <DependenciesContext.Provider value={GenreBreakdownInfo}>
+      <DependenciesContext.Provider value={{ GenreBreakdownInfo }}>
         <GenreBreakdown />
       </DependenciesContext.Provider>
     </>

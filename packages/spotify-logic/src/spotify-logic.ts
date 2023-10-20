@@ -162,5 +162,17 @@ export async function getTopGenresFromArtists(
     });
   });
 
-  return genreList;
+  const genreArray: [string, number][] = Object.entries(genreList);
+
+  genreArray.sort((a, b) => b[1] - a[1]);
+
+  const genreNames = genreArray.map((innerList) => innerList[0]);
+  const genreValues = genreArray.map((innerList) => innerList[1]);
+
+  const genreBreakdownInfo = {
+    genreNames: genreNames,
+    genreValues: genreValues,
+  };
+
+  return genreBreakdownInfo;
 }
