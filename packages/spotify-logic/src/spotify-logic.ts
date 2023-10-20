@@ -24,7 +24,7 @@ export async function getTopSongs(accessToken: any, term: string) {
   const data = await response.json();
 
   const TopSongsInfo: Array<songItem> = [];
-  const AristIdList = new Set();
+  const AristIdList: any[] = [];
 
   data.items.slice(0, 5).forEach((song: any) => {
     var newSongItem: songItem = {
@@ -38,14 +38,11 @@ export async function getTopSongs(accessToken: any, term: string) {
   });
 
   data.items.forEach((song: any) => {
-    AristIdList.add({
-      name: song.artists[0].name,
-      id: song.artists[0].id,
-    });
+    AristIdList.push(song.artists[0].id);
   });
 
   const TopSongsObj = {
-    AristIdList: AristIdList,
+    ArtistIdList: AristIdList,
     TopSongsInfo: TopSongsInfo,
   };
 

@@ -1,10 +1,15 @@
 import { Inter } from "next/font/google";
 import { useSession, signOut, signIn } from "next-auth/react";
-import { getTopArtists, getTopSongs, getUserProfile } from "spotify-logic";
+import {
+  getTopArtists,
+  getTopSongs,
+  getUserProfile,
+  getUserPlaylistNum,
+  getTopGenresFromArtists,
+} from "spotify-logic";
 import { useState, useEffect } from "react";
 import { TopArtists, TopTracks, UserDisplay } from "data-visuals";
 import { DependenciesContext } from "dependencies-context";
-import { getUserPlaylistNum } from "spotify-logic/src/spotify-logic";
 import {
   Box,
   Button,
@@ -25,12 +30,19 @@ export const themeDark = createTheme({
   },
 });
 
+interface ArtistIds {
+  month: any;
+  year: any;
+  allTime: any;
+}
+
 export default function Home() {
   const { data: session, status } = useSession();
   const [TopTracksInfo, setTopTracksInfo] = useState({});
-  const [profile, setProfile] = useState({});
   const [UserDisplayInfo, setUserDisplayInfo] = useState({});
   const [TopArtistsInfo, setTopArtistsInfo] = useState({});
+  const [ArtistIds, setArtistIds] = useState<ArtistIds>();
+  const [TopGenres, setTopGenres] = useState<any>();
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -98,11 +110,48 @@ export default function Home() {
         year: result?.TopTracksInfo_year.TopSongsInfo,
         allTime: result?.TopTracksInfo_allTime.TopSongsInfo,
       });
-
-      // setProfile(result?.userProfile);
+      setArtistIds({
+        month: result?.TopTracksInfo_month.ArtistIdList,
+        year: result?.TopTracksInfo_year.ArtistIdList,
+        allTime: result?.TopTracksInfo_year.ArtistIdList,
+      });
       setLoading(false);
     });
   }, [session]);
+
+  useEffect(() => {
+    async function fetchGenreData() {
+      if (ArtistIds?.month && ArtistIds?.year && ArtistIds?.allTime) {
+        let accessToken = session?.user?.accessToken;
+
+        const TopGenres_month = await getTopGenresFromArtists(
+          accessToken,
+          ArtistIds?.month
+        );
+        const TopGenres_year = await getTopGenresFromArtists(
+          accessToken,
+          ArtistIds?.year
+        );
+        const TopGenres_allTime = await getTopGenresFromArtists(
+          accessToken,
+          ArtistIds?.allTime
+        );
+
+        return {
+          TopGenres_month,
+          TopGenres_year,
+          TopGenres_allTime,
+        };
+      }
+    }
+    fetchGenreData().then((result) => {
+      setTopGenres({
+        month: result?.TopGenres_month,
+        year: result?.TopGenres_year,
+        allTime: result?.TopGenres_allTime,
+      });
+    });
+  }, [ArtistIds]);
 
   return (
     <>
@@ -136,6 +185,7 @@ export default function Home() {
                   </Grid>
                 </Grid>
               </Grid>
+              <Typography>{JSON.stringify(TopGenres)}</Typography>
             </Box>
           </ThemeProvider>
         </DependenciesContext.Provider>
