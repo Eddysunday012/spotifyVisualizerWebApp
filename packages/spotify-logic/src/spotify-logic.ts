@@ -138,7 +138,6 @@ export async function getTopGenresFromArtists(
   ArtistIdList: Array<any>
 ) {
   const IdListString = ArtistIdList.join(",");
-  console.log(IdListString);
 
   const response = await fetch(
     `https://api.spotify.com/v1/artists?ids=${IdListString}`,

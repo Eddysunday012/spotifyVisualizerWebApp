@@ -8,7 +8,12 @@ import {
   getTopGenresFromArtists,
 } from "spotify-logic";
 import { useState, useEffect } from "react";
-import { TopArtists, TopTracks, UserDisplay } from "data-visuals";
+import {
+  GenreBreakdown,
+  TopArtists,
+  TopTracks,
+  UserDisplay,
+} from "data-visuals";
 import { DependenciesContext } from "dependencies-context";
 import {
   Box,
@@ -42,7 +47,7 @@ export default function Home() {
   const [UserDisplayInfo, setUserDisplayInfo] = useState({});
   const [TopArtistsInfo, setTopArtistsInfo] = useState({});
   const [ArtistIds, setArtistIds] = useState<ArtistIds>();
-  const [TopGenres, setTopGenres] = useState<any>();
+  const [GenreBreakdownInfo, setTopGenres] = useState<any>();
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -110,12 +115,12 @@ export default function Home() {
         year: result?.TopTracksInfo_year.TopSongsInfo,
         allTime: result?.TopTracksInfo_allTime.TopSongsInfo,
       });
+
       setArtistIds({
         month: result?.TopTracksInfo_month.ArtistIdList,
         year: result?.TopTracksInfo_year.ArtistIdList,
         allTime: result?.TopTracksInfo_year.ArtistIdList,
       });
-      setLoading(false);
     });
   }, [session]);
 
@@ -145,11 +150,13 @@ export default function Home() {
       }
     }
     fetchGenreData().then((result) => {
+      console.log(result);
       setTopGenres({
         month: result?.TopGenres_month,
         year: result?.TopGenres_year,
         allTime: result?.TopGenres_allTime,
       });
+      setLoading(false);
     });
   }, [ArtistIds]);
 
@@ -159,7 +166,12 @@ export default function Home() {
         <p>Loading...</p>
       ) : (
         <DependenciesContext.Provider
-          value={{ UserDisplayInfo, TopArtistsInfo, TopTracksInfo }}
+          value={{
+            UserDisplayInfo,
+            TopArtistsInfo,
+            TopTracksInfo,
+            GenreBreakdownInfo,
+          }}
         >
           <ThemeProvider theme={themeDark}>
             <Box
@@ -183,9 +195,11 @@ export default function Home() {
                   <Grid container item xs={6}>
                     <TopTracks />
                   </Grid>
+                  <Grid container item xs={6}>
+                    <GenreBreakdown />
+                  </Grid>
                 </Grid>
               </Grid>
-              <Typography>{JSON.stringify(TopGenres)}</Typography>
             </Box>
           </ThemeProvider>
         </DependenciesContext.Provider>
