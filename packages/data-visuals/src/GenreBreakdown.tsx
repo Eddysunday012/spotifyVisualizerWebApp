@@ -51,6 +51,9 @@ const options = {
       },
       ticks: {
         display: false,
+        stepSize: 5,
+        min: 5,
+        max: 5,
       },
     },
   },
@@ -85,11 +88,15 @@ export const GenreBreakdown: React.FunctionComponent<
         ];
 
         const data = {
-          labels: genreListItems[genreListNum].genreNames.slice(0, 5),
+          labels: genreListItems[genreListNum]
+            ? genreListItems[genreListNum].genreNames.slice(0, 5)
+            : [],
           datasets: [
             {
               label: "",
-              data: genreListItems[genreListNum].genreValues.slice(0, 5),
+              data: genreListItems[genreListNum]
+                ? genreListItems[genreListNum].genreValues.slice(0, 5)
+                : [],
               backgroundColor: "rgba(29, 185, 84, 0.31)",
               borderColor: "rgba(29, 185, 84, 1)",
               borderWidth: 2,
@@ -99,7 +106,12 @@ export const GenreBreakdown: React.FunctionComponent<
 
         return (
           <ThemeProvider theme={mainTheme}>
-            <Grid sx={{ justifyContent: "center" }}>
+            <Grid
+              container
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
+            >
               <Typography
                 sx={{ color: "#FFFFFF", fontSize: 45 }}
                 fontWeight={800}
@@ -111,11 +123,10 @@ export const GenreBreakdown: React.FunctionComponent<
                 sx={{
                   backgroundColor: "#535353",
                   borderRadius: "3%",
-                  width: "auto",
                 }}
+                width="80%"
               >
                 <Container>
-                  <Radar data={data} options={options} />
                   <Grid container alignItems="center" justifyContent="center">
                     <Grid
                       container
@@ -215,6 +226,15 @@ export const GenreBreakdown: React.FunctionComponent<
                       </Button>
                     </Grid>
                   </Grid>
+                  <div
+                    style={{
+                      maxHeight: "300px",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Radar data={data} options={options} />
+                  </div>
                 </Container>
               </Box>
             </Grid>

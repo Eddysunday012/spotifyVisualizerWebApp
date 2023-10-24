@@ -4,7 +4,7 @@ import { artistItem, songItem } from "types";
  *
  * @param accessToken from env
  * @param term short_term, medium_term, or long_term
- * @returns TopSongObj with object containing TopSongsInfo and ArtistIdList
+ * @returns TopSongObj with object containing TopSongsInfo, SongIdList and ArtistIdList
  */
 export async function getTopSongs(accessToken: any, term: string) {
   const response = await fetch(
@@ -25,6 +25,7 @@ export async function getTopSongs(accessToken: any, term: string) {
 
   const TopSongsInfo: Array<songItem> = [];
   const AristIdList: any[] = [];
+  const SongIdList: any[] = [];
 
   data.items.slice(0, 5).forEach((song: any) => {
     var newSongItem: songItem = {
@@ -39,14 +40,16 @@ export async function getTopSongs(accessToken: any, term: string) {
 
   data.items.forEach((song: any) => {
     AristIdList.push(song.artists[0].id);
+    SongIdList.push(song.id);
   });
 
   const TopSongsObj = {
     ArtistIdList: AristIdList,
+    SongIdList: SongIdList,
     TopSongsInfo: TopSongsInfo,
   };
 
-  return TopSongsObj; // Assuming the response contains an "items" array of top tracks.
+  return TopSongsObj;
 }
 
 /**
@@ -148,6 +151,11 @@ export async function getTopGenresFromArtists(
     }
   );
 
+  if (!response.ok) {
+    // console.log(response);
+    throw new Error("Failed to fetch top tracks");
+  }
+
   const data = await response.json();
 
   const genreList: { [key: string]: number } = {};
@@ -174,4 +182,29 @@ export async function getTopGenresFromArtists(
   };
 
   return genreBreakdownInfo;
+}
+
+export async function getAudioFeaturesFromSongIds(
+  accessToken: any,
+  songIds: any
+) {
+  const IdListString = songIds.join(",");
+
+  const response = await fetch(
+    `https://api.spotify.com/v1/audio-features?ids=${IdListString}`,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    // console.log(response);
+    throw new Error("Failed to fetch top tracks");
+  }
+
+  const data = await response.json();
+
+  return data.audio_features;
 }

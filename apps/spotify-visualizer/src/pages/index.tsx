@@ -9,6 +9,7 @@ import {
 } from "spotify-logic";
 import { useState, useEffect } from "react";
 import {
+  Cluster,
   GenreBreakdown,
   TopArtists,
   TopTracks,
@@ -23,6 +24,7 @@ import {
   Typography,
   Grid,
 } from "@mui/material";
+import { getAudioFeaturesFromSongIds } from "spotify-logic/src/spotify-logic";
 
 export const themeDark = createTheme({
   palette: {
@@ -47,6 +49,8 @@ export default function Home() {
   const [UserDisplayInfo, setUserDisplayInfo] = useState({});
   const [TopArtistsInfo, setTopArtistsInfo] = useState({});
   const [ArtistIds, setArtistIds] = useState<ArtistIds>();
+  const [SongIds, setSongIds] = useState<any>();
+  const [ClusterInfo, setClusterInfo] = useState<any>();
   const [GenreBreakdownInfo, setTopGenres] = useState<any>();
   const [isLoading, setLoading] = useState(true);
 
@@ -121,6 +125,12 @@ export default function Home() {
         year: result?.TopTracksInfo_year.ArtistIdList,
         allTime: result?.TopTracksInfo_year.ArtistIdList,
       });
+
+      setSongIds({
+        month: result?.TopTracksInfo_month.SongIdList,
+        year: result?.TopTracksInfo_year.SongIdList,
+        allTime: result?.TopTracksInfo_allTime.SongIdList,
+      });
     });
   }, [session]);
 
@@ -149,16 +159,35 @@ export default function Home() {
         };
       }
     }
+
     fetchGenreData().then((result) => {
-      console.log(result);
       setTopGenres({
         month: result?.TopGenres_month,
         year: result?.TopGenres_year,
         allTime: result?.TopGenres_allTime,
       });
-      setLoading(false);
     });
   }, [ArtistIds]);
+
+  useEffect(() => {
+    async function fetchAudioFeatures() {
+      if (SongIds?.month && SongIds?.year && SongIds?.allTime) {
+        let accessToken = session?.user?.accessToken;
+
+        const audioFeatures = await getAudioFeaturesFromSongIds(
+          accessToken,
+          SongIds.month
+        );
+
+        return audioFeatures;
+      }
+    }
+    fetchAudioFeatures().then((result) => {
+      console.log(result);
+      setClusterInfo(result);
+      setLoading(false);
+    });
+  }, [SongIds]);
 
   return (
     <>
@@ -171,15 +200,16 @@ export default function Home() {
             TopArtistsInfo,
             TopTracksInfo,
             GenreBreakdownInfo,
+            ClusterInfo,
           }}
         >
           <ThemeProvider theme={themeDark}>
             <Box
               sx={{
                 backgroundColor: "#212121",
-                minHeight: "100vh", // Ensure the background color covers the full viewport height
+                minHeight: "100vh",
                 display: "flex",
-                flexDirection: "column", // Align children vertically
+                flexDirection: "column",
                 overflowX: "hidden",
                 margin: -1,
               }}
@@ -189,13 +219,16 @@ export default function Home() {
                   <UserDisplay />
                 </Grid>
                 <Grid item container xs={8}>
-                  <Grid container item xs={6}>
+                  <Grid container item xs={6} justifyContent="center">
                     <TopArtists />
                   </Grid>
-                  <Grid container item xs={6}>
+                  <Grid container item xs={6} justifyContent="center">
                     <TopTracks />
                   </Grid>
-                  <Grid container item xs={6}>
+                  <Grid container item xs={6} justifyContent="center">
+                    <Cluster />
+                  </Grid>
+                  <Grid container item xs={6} justifyContent="center">
                     <GenreBreakdown />
                   </Grid>
                 </Grid>

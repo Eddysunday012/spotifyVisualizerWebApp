@@ -38,7 +38,10 @@
     "d3": "^7.8.5",
     "framer-motion": "^10.16.4",
     "next-auth": "latest",
+    "nodeplotlib": "^1.1.2",
+    "pandas-js": "^0.2.4",
     "react-chartjs-2": "^5.2.0",
+    "scikit-learn": "^0.1.0",
     "spotify-web-api-node": "^5.0.2"
   }
 }

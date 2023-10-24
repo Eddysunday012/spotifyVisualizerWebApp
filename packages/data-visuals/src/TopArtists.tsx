@@ -70,7 +70,12 @@ export const TopArtists: React.FunctionComponent<
 
         return (
           <ThemeProvider theme={mainTheme}>
-            <Grid sx={{ justifyContent: "center" }}>
+            <Grid
+              container
+              direction="column"
+              alignItems="center"
+              sx={{ justifyContent: "center" }}
+            >
               <Typography
                 sx={{ color: "#FFFFFF", fontSize: 45 }}
                 fontWeight={800}
@@ -82,8 +87,8 @@ export const TopArtists: React.FunctionComponent<
                 sx={{
                   backgroundColor: "#535353",
                   borderRadius: "3%",
-                  width: "auto",
                 }}
+                width="80%"
               >
                 <Container>
                   <Grid container alignItems="center" justifyContent="center">
