@@ -8,6 +8,7 @@ Welcome to my spotify visualizer! This next.js web app allows users to visualize
 
 This project requires some things to start.
 
+0. Create a Spotify profile
 1. Install Node.js (v16.18.1) and npm
 2. Install Yarn: `npm install --global yarn`
 3. Install npm dependencies: `yarn`
@@ -26,6 +27,7 @@ This Turborepo includes the following packages/apps:
 
 - `spotify-visualizer`
   - the main next.js supporting all the components
+  - user authentication is handled with [next-auth.js](https://next-auth.js.org/)
 - `[module-name]-dev`
   - all vite powered web-apps to display and test each ui component in isolation
 
@@ -45,20 +47,16 @@ This Turborepo includes the following packages/apps:
 - `types`
   - types used for each project
 
-### Build
+## Technologies
 
-To build all apps and packages, run the following command:
+In no particular order:
 
-```
-yarn
-yarn build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-yarn
-yarn dev
-```
+- Typescript
+- React
+- Material UI
+- npm, yarn, turborepo
+- Next.js
+- Next-Auth
+- Vite
+- Vitest
+- react-chartjs-2
