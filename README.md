@@ -2,6 +2,8 @@
 
 Welcome to my spotify visualizer! This next.js web app allows users to visualize their personal spotify data!
 
+![Screenshot 2023-10-23 at 10 43 11 PM](https://github.com/Eddysunday012/spotifyVisualizerWebApp/assets/30426558/ce9cbee1-23fd-409d-9ac1-2cc850916094)
+
 ## Setting Up
 
 This project requires some things to start.
