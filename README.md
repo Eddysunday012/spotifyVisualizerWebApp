@@ -8,37 +8,50 @@ Welcome to my spotify visualizer! This next.js web app allows users to visualize
 
 This project requires some things to start.
 
-0. Make sure to have a
+1. Install Node.js (v16.18.1) and npm
+2. Install Yarn: `npm install --global yarn`
+3. Install npm dependencies: `yarn`
+
+## Project Structure
+
+This project uses [Turborepo](https://turborepo.org/) to help facilitate and create a hyper-modularized codebase. This means creating many local npm modules to build, iterate, and test features in complete isolation.
+
+_NOTE_: Turborepo supports a monorepo structure, which is what the website's architecture is based off of. It is _extremely_ overkill for the needs of the current state of this project, however I modeled it this way in case for possible larger expansion in the future.
 
 ## What's inside?
 
 This Turborepo includes the following packages/apps:
 
-### Project Structure
+#### Apps
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+- `spotify-visualizer`
+  - the main next.js supporting all the components
+- `[module-name]-dev`
+  - all vite powered web-apps to display and test each ui component in isolation
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+#### Packages
 
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+- `data-visuals`
+  - all separate ui components along with their respective unit testing suites
+    - TODO: add testing suites for Cluster and GenreBreakdown
+- `dependencies-context`
+  - react context to pass props and data to all ui components
+- `spotify-logic`
+  - all functions that use API calls to spotify-web-api, along with their respective testing suites
+- `theme`
+  - main theme that is applied to all components
+- `tsconfig`
+  - all typescript config files
+- `types`
+  - types used for each project
 
 ### Build
 
 To build all apps and packages, run the following command:
 
 ```
-cd my-turborepo
-pnpm build
+yarn
+yarn build
 ```
 
 ### Develop
@@ -46,36 +59,6 @@ pnpm build
 To develop all apps and packages, run the following command:
 
 ```
-cd my-turborepo
-pnpm dev
+yarn
+yarn dev
 ```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
