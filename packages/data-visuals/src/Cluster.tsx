@@ -36,10 +36,10 @@ export const Cluster: React.FC = () => {
 
   useEffect(() => {
     if (ClusterInfo) {
-      const ScatterData = processData(ClusterInfo, "valence", "tempo");
+      const ScatterData = processData(ClusterInfo, "danceability", "energy");
       setChartData(ScatterData);
     }
-  }, [ClusterInfo]);
+  }, [ClusterInfo, clusterListNum]);
 
   // Scatter plot options
   const options = {
@@ -63,18 +63,23 @@ export const Cluster: React.FC = () => {
         },
       },
     },
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
   };
 
   const processData = (dependenciesData: any, x: string, y: string) => {
     const mainData: any[] = [];
-    dependenciesData.forEach((song: any) => {
+    dependenciesData[clusterListNum].forEach((song: any) => {
       mainData.push({ x: song[x], y: song[y] });
     });
 
     return {
       datasets: [
         {
-          label: "Main Label",
+          label: `${x} ${y}`,
           data: mainData,
           backgroundColor: "rgba(75, 192, 192, 0.5)",
           pointBackgroundColor: "#1DB954", // Set all points to be the same color
@@ -97,7 +102,7 @@ export const Cluster: React.FC = () => {
           fontWeight={800}
           align="center"
         >
-          Tempo vs Valence
+          Danceability vs Energy
         </Typography>
         <Box
           sx={{
@@ -198,6 +203,7 @@ export const Cluster: React.FC = () => {
                       textTransform: "none",
                       textDecoration:
                         underlinedButton === 2 ? "underline" : "none",
+                      whiteSpace: "nowrap",
                     }}
                     sx={{ color: "#FFFFFF", fontSize: 30 }}
                   >

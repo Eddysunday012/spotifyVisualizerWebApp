@@ -214,6 +214,7 @@ export const TopTracks: React.FunctionComponent<TopTracksDisplayProps> = () => {
                             textTransform: "none",
                             textDecoration:
                               underlinedButton === 2 ? "underline" : "none",
+                            whiteSpace: "nowrap",
                           }}
                           sx={{ color: "#FFFFFF", fontSize: 30 }}
                         >

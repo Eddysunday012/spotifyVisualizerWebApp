@@ -218,8 +218,13 @@ export const GenreBreakdown: React.FunctionComponent<
                             textTransform: "none",
                             textDecoration:
                               underlinedButton === 2 ? "underline" : "none",
+                            whiteSpace: "nowrap",
                           }}
-                          sx={{ color: "#FFFFFF", fontSize: 30 }}
+                          sx={{
+                            color: "#FFFFFF",
+                            fontSize: 30,
+                          }}
+                          maxHeight="2.5em"
                         >
                           All Time
                         </Typography>

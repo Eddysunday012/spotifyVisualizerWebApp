@@ -174,16 +174,25 @@ export default function Home() {
       if (SongIds?.month && SongIds?.year && SongIds?.allTime) {
         let accessToken = session?.user?.accessToken;
 
-        const audioFeatures = await getAudioFeaturesFromSongIds(
+        const audioFeatures_month = await getAudioFeaturesFromSongIds(
           accessToken,
           SongIds.month
         );
 
-        return audioFeatures;
+        const audioFeatures_year = await getAudioFeaturesFromSongIds(
+          accessToken,
+          SongIds.year
+        );
+
+        const audioFeatures_allTime = await getAudioFeaturesFromSongIds(
+          accessToken,
+          SongIds.year
+        );
+
+        return [audioFeatures_month, audioFeatures_year, audioFeatures_allTime];
       }
     }
     fetchAudioFeatures().then((result) => {
-      console.log(result);
       setClusterInfo(result);
       setLoading(false);
     });
